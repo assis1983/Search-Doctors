@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { EyeShut } from "../../assets/icons/shut";
-import { InputCheckbox } from "../Input/style";
+import { InputCheckbox} from "../Input/style";
+import Eye from "../../assets/icons/eye";
 
 type Props = {
   label: string;
@@ -22,20 +22,20 @@ export function Input({
   };
 
   return (
-    <InputCheckbox className={inputState ? "success" : ""}>
-      <label htmlFor={label}>{label}</label>
-      <input
-        id={label}
-        value={inputState}
-        placeholder={placeholder}
-        onChange={handleInput}
-        type={password ? "password" : "text"}
-      />
-      {password && (
-        <div className="eyeIconDiv">
-          <EyeShut />
-        </div>
-      )}
-    </InputCheckbox>
+    <>
+      <InputCheckbox className={inputState ? "success" : ""}>
+        <label htmlFor={label}>{label}</label>
+        <input
+          id={label}
+          value={inputState}
+          placeholder={placeholder}
+          onChange={handleInput}
+          type={password ? "password" : "text"}
+        />
+        {password && (
+            <Eye />
+        )}
+      </InputCheckbox>
+    </>
   );
 }

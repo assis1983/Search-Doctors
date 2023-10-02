@@ -5,7 +5,8 @@ import { Title } from "../components/Title/style";
 import { Subtitle } from "../components/Subtitle/styles";
 import { Checkbox } from "../components/CheckBox";
 import { Input } from "../components/Input";
-import { Button } from "../components/Button"
+import { Button } from "../components/Button";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [stateLogin, setStateLogin] = useState("");
@@ -48,7 +49,9 @@ const Login = () => {
               <Subtitle>Esqueci minha senha</Subtitle>
             </div>
           </div>
-          <Button text="Entrar" variant="login" onClick={() => doLogin()} />
+          <Link to="/">
+            <Button text="Entrar" variant="login" onClick={() => doLogin()} />
+          </Link>
         </Form>
       </div>
       <div></div>
