@@ -15,6 +15,7 @@ type TableProps = {
 };
 
 const Table = ({ data, columnNames }: TableProps) => {
+  
   const keys = Object.keys(columnNames);
   return (
     <S.TableStyle>
@@ -39,3 +40,6 @@ const Table = ({ data, columnNames }: TableProps) => {
 };
 
 export default Table;
+
+
+

@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { SelectDaysStyle } from "./styles";
 
-type SelectDaysProps = {
+type SelectProps = {
   options: string[];
   defaultOptionText: string;
 };
 
-const SelectDays = ({ options, defaultOptionText }: SelectDaysProps) => {
+const SelectDays = ({ options, defaultOptionText }: SelectProps) => {
   return (
     <div>
       <SelectDaysStyle>

@@ -6,7 +6,8 @@ import { Subtitle } from "../components/Subtitle/styles";
 import { Checkbox } from "../components/CheckBox";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { postLogin } from "../services/auth/auth";
 
 const Login = () => {
   const [stateLogin, setStateLogin] = useState("");
@@ -20,6 +21,7 @@ const Login = () => {
     }
     alert(result.message);
   };
+
   return (
     <ContainerLogin>
       <div className="leftContainer">

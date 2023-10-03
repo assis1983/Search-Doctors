@@ -36,7 +36,7 @@ export const InputCheckbox = styled.div`
   }
 
   label {
-    margin-left: -1.5rem;
+    margin-left: -1rem;
     font-size: 1rem;
     position: absolute;
     top: 0.5rem;

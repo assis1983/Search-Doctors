@@ -10,10 +10,10 @@ export const colors = {
     deepGrey: '#757575',
     grey: '#E0E0E0;',
     lightGrey: '#FAFAFA',
-    lightRed: '#FFE1E1',
+    lightWhite: '#616161',
+    light: '#EEEEEE',
     black: '#000000',
     primary: '#046639',
     secundary: '#0E9658',
     phrase:'#212121',
   }
- 

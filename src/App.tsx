@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "../src/pages/dashboard";
 import Login from "./pages/login";
 import RegisterUser from "./pages/registerUsers";
+import ClientesDetails from "./pages/clientesdetails";
 
 function App() {
   return (
@@ -10,9 +11,10 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="registeruser" element={<RegisterUser />} />
+          <Route path="/registeruser" element={<RegisterUser />} />
+          <Route path="/clientesdetails" element={<ClientesDetails />} />
         </Routes>
       </BrowserRouter>
     </>

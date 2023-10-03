@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
 import { Title } from "../components/Title/style";
-import { Container } from "../components/Container/styles";
+import { Container, GrayText } from "../components/Container/styles";
 import Table from "../components/Table";
 import { SearchInput } from "../components/Search";
 import { StyleInputs } from "../components/Search/styles";
 import SelectDays from "../components/SelectFilter";
 import CardButtonFIlter from "../components/ButtonsFilter";
+import { Link } from "react-router-dom";
 
 const columnNames = {
   column1: "Usuário",
@@ -24,14 +25,15 @@ const data = [
 ];
 
 const RegisterUser = () => {
-  const [selectedButton, setSelectedButton] = useState("Todos");
+  const [selectedButton, setSelectedButton] = useState<string>("Todos");
+
   return (
     <>
       <Menu />
       <Header />
       <Container>
         <Title fontSize={32}>
-          Usuários Cadastrados | {selectedButton}
+          Usuários Cadastrados | <GrayText>{selectedButton}</GrayText>
         </Title>
         <CardButtonFIlter
           selectedButton={selectedButton}
@@ -57,7 +59,9 @@ const RegisterUser = () => {
             <p>1.200</p>
           </div>
         </StyleInputs>
-        <Table data={data} columnNames={columnNames} />
+        <Link to={"/clientesdetails"}>
+          <Table data={data} columnNames={columnNames} />
+        </Link>
       </Container>
     </>
   );

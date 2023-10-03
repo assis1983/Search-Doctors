@@ -18,3 +18,6 @@ export const MainContainer = styled.div`
   margin-left: auto;
   margin-top: -70rem;
 `;
+export const GrayText = styled.span`
+  font-weight: 100;
+`;
