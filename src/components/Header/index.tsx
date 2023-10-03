@@ -20,7 +20,6 @@ export function Header() {
           <ChevronDown />
         </button>
       </S.UserHeadStyle>
-      <S.UserOptionsStyle></S.UserOptionsStyle>
     </S.HeaderStyle>
   );
 }

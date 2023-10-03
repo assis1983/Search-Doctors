@@ -21,23 +21,23 @@ const Itens = [
   },
   {
     icon: <Dollar />,
-    text: "Pagamentos",
-    url: "/",
+    text: "Planos",
+    url: "/plans",
   },
   {
     icon: <Composition />,
     text: "Especialidades",
-    url: "/",
+    url: "/specialties",
   },
   {
     icon: <Remind />,
     text: "Notificações",
-    url: "/",
+    url: "/notifications",
   },
   {
     icon: <Help />,
     text: "FAQ",
-    url: "/",
+    url: "/faq",
   },
 ];
 
