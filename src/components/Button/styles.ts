@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '../../theme'
-export const StyledButton = styled.button<{ variant: 'login' | 'faleConosco' }>`
+export const StyledButton = styled.button<{ variant: 'login' | 'newplain' }>`
   background-color: #046639;
   color: #ffffff;
   border-radius: ${({ variant }) => (variant === 'login' ? '16px' : '20px')};

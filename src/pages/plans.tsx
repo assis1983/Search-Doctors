@@ -8,14 +8,15 @@ import { SearchInput } from "../components/Search";
 import { StyleInputs } from "../components/Search/styles";
 import { FilterButton } from "../components/Filter";
 import { StyleDivFilter } from "../components/Filter/styles";
+import { ButtonAdd } from "../components/ButtonAdd";
 import Table from "../components/Table";
 
 const columnNames = {
-  column1: "Usuário",
-  column2: "Email",
-  column3: "WhatsApp",
-  column4: "Especialidade",
-  column5: "Tipo de Usuário",
+  column1: "",
+  column2: "Valor",
+  column3: "Preço Promocional",
+  column4: "Situação",
+  column5: "Ações",
 };
 
 const data = [
@@ -64,6 +65,9 @@ const Plans = () => {
             setStateFilter={setStateFilter}
             getFilter={fetchProducts}
           />
+          <ButtonAdd text={"Novo Plano"} onClick={function (): void {
+            throw new Error("Function not implemented.");
+          } } />
         </StyleDivFilter>
         <Table data={data} columnNames={columnNames} />
       </Container>

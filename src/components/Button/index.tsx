@@ -2,7 +2,7 @@ import { StyledButton } from "./styles";
 
 type Props = {
   text: string;
-  variant: "login" | "faleConosco";
+  variant: "login" | "newplan";
   onClick: () => void;
 };
 

@@ -54,7 +54,7 @@ export function FilterButton({
             </div>
             <div className="buttonDiv">
               <Button
-                variant="faleConosco"
+                variant="newplan"
                 onClick={() => getFilter()}
                 text="Aplicar"
               />
