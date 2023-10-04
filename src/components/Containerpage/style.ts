@@ -12,14 +12,14 @@ export const ContainerLogin = styled.div`
   flex-direction: column;
 
   .leftContainer {
-    width: 100%; 
-    max-width: 500px; 
+    width: 100%;
+    max-width: 500px;
     background-color: #fff;
     border-radius: 16px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 3rem; 
+    padding: 3rem;
 
     .textLoginContainer {
       margin-top: 1rem;
@@ -33,7 +33,6 @@ export const ContainerLogin = styled.div`
   #checkbox-remember {
     margin: 1rem 0rem;
   }
-
   .checkboxDiv {
     margin: 5px;
     display: flex;

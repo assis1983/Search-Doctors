@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { colors } from '../../theme'
 export const StyledButton = styled.button<{ variant: 'login' | 'faleConosco' }>`
   background-color: #046639;
   color: #ffffff;
@@ -10,4 +10,9 @@ export const StyledButton = styled.button<{ variant: 'login' | 'faleConosco' }>`
   cursor: pointer;
   border: none;
   margin: 10px;
+  .style-buttonplans {
+    button {
+      background-color: ${colors.deepGrey};
+    }
+  }
 `
