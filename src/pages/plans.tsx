@@ -8,6 +8,21 @@ import { SearchInput } from "../components/Search";
 import { StyleInputs } from "../components/Search/styles";
 import { FilterButton } from "../components/Filter";
 import { StyleDivFilter } from "../components/Filter/styles";
+import Table from "../components/Table";
+
+const columnNames = {
+  column1: "Usuário",
+  column2: "Email",
+  column3: "WhatsApp",
+  column4: "Especialidade",
+  column5: "Tipo de Usuário",
+};
+
+const data = [
+  { column1: "A", column2: "B", column3: "C", column4: "D", column5: "E" },
+  { column1: "E", column2: "F", column3: "G", column4: "H", column5: "E" },
+  { column1: "E", column2: "F", column3: "G", column4: "H", column5: "E" },
+];
 
 const Plans = () => {
   const [selectedButton, setSelectedButton] = useState<string>("Médicos");
@@ -50,6 +65,7 @@ const Plans = () => {
             getFilter={fetchProducts}
           />
         </StyleDivFilter>
+        <Table data={data} columnNames={columnNames} />
       </Container>
     </>
   );
