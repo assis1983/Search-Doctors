@@ -10,6 +10,7 @@ import { FilterButton } from "../components/Filter";
 import { StyleDivFilter } from "../components/Filter/styles";
 import { ButtonAdd } from "../components/ButtonAdd";
 import Table from "../components/Table";
+import ToggleButton from "../components/ToggleButton";
 
 const columnNames = {
   column1: "",
@@ -65,11 +66,19 @@ const Plans = () => {
             setStateFilter={setStateFilter}
             getFilter={fetchProducts}
           />
-          <ButtonAdd text={"Novo Plano"} onClick={function (): void {
-            throw new Error("Function not implemented.");
-          } } />
+          <ButtonAdd
+            text={"Novo Plano"}
+            onClick={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
         </StyleDivFilter>
         <Table data={data} columnNames={columnNames} />
+        <ToggleButton
+          onToggle={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
       </Container>
     </>
   );
