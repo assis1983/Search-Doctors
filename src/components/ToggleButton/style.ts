@@ -1,8 +1,8 @@
 import styled from "styled-components";
-
+import { colors } from "../../theme";
 
 export const ToggleButtonContainer = styled.button<{ active: boolean }>`
-  background-color: ${(props) => (props.active ? 'green' : 'gray')};
+  background-color: ${(props) => (props.active ? colors.success : 'gray')};
   width: 58px;
   height: 28px;
   color: white;
@@ -27,3 +27,10 @@ export const Ball = styled.div<{ active: boolean }>`
   transition: left 0.3s ease-in-out;
   top: 50%;
 `;
+
+export const ActionButton = styled.button`
+  background-color: ${colors.white};
+  border: none;
+  cursor: pointer;
+
+`

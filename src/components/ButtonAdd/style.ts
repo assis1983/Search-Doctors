@@ -14,5 +14,5 @@ export const StyledButtonAdd = styled.button`
   color: ${colors.white};
   border: none;
   cursor: pointer;
-  margin-left: auto;
 `;
+

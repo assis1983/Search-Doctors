@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export const StyleInputUser = styled.div`
     display: flex;
+    gap: 1.5rem;
     label {
         color: ${colors.deepGrey};
     }
@@ -17,16 +18,22 @@ export const StyleInputUser = styled.div`
         height: 182px;
        }
     }
+    .styled-toogle {
+        margin-top: 1rem;
+    }
+    .styled-title-active {
+        margin-top: 2.5rem;
+        color: ${colors.phrase};
+    }
+    
 }
 `;
 
 export const StyledCheckbox = styled.div`
-    display: flex;
-    gap: 1rem;
-    
-`
+  display: flex;
+  gap: 1rem;
+`;
 export const StyleLinkUser = styled(Link)`
-   text-decoration: none; 
-   color: inherit;
-
-`
+  text-decoration: none;
+  color: inherit;
+`;

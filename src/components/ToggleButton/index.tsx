@@ -18,7 +18,6 @@ const ToggleButton = ({ onToggle }: Props) => {
       <ToggleButtonContainer active={isActive} onClick={handleClick}>
         <Ball active={isActive}/>
       </ToggleButtonContainer>
-      <p>Ativo</p>
     </div>
   );
 };

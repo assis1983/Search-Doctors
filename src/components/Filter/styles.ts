@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../theme";
+import { Link } from "react-router-dom";
 
 export const FilterStyle = styled.div`
   button {
@@ -52,4 +53,7 @@ export const StyleDivFilter = styled.div`
   align-items: center;
 `;
 
-
+export const StyleLinkNewPlan = styled(Link)`
+  text-decoration: none;
+  margin-left: auto;
+`;

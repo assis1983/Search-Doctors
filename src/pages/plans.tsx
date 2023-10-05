@@ -11,6 +11,12 @@ import { StyleDivFilter } from "../components/Filter/styles";
 import { ButtonAdd } from "../components/ButtonAdd";
 import Table from "../components/Table";
 import ToggleButton from "../components/ToggleButton";
+import { ActionButton } from "../components/ToggleButton/style";
+import EyeTable from "../assets/icons/eyetable";
+import Pencil from "../assets/icons/pencil";
+import Delete from "../assets/icons/delete";
+import { StyleLinkNewPlan } from "../components/Filter/styles";
+import { Link } from "react-router-dom";
 
 const columnNames = {
   column1: "",
@@ -21,11 +27,76 @@ const columnNames = {
 };
 
 const data = [
-  { column1: "A", column2: "B", column3: "C", column4: "D", column5: "E" },
-  { column1: "E", column2: "F", column3: "G", column4: "H", column5: "E" },
-  { column1: "E", column2: "F", column3: "G", column4: "H", column5: "E" },
+  {
+    column1: <Link to={"/typeplan"}>Teste</Link>,
+    column2: "B",
+    column3: "C",
+    column4: (
+      <>
+        <ToggleButton onToggle={() => {}} /> Ativo
+      </>
+    ),
+    column5: (
+      <>
+        <ActionButton>
+          <EyeTable />
+        </ActionButton>
+        <ActionButton>
+          <Pencil />
+        </ActionButton>
+        <ActionButton>
+          <Delete />
+        </ActionButton>
+      </>
+    ),
+  },
+  {
+    column1: "E",
+    column2: "F",
+    column3: "G",
+    column4: (
+      <>
+        <ToggleButton onToggle={() => {}} /> Ativo
+      </>
+    ),
+    column5: (
+      <>
+        <ActionButton>
+          <EyeTable />
+        </ActionButton>
+        <ActionButton>
+          <Pencil />
+        </ActionButton>
+        <ActionButton>
+          <Delete />
+        </ActionButton>
+      </>
+    ),
+  },
+  {
+    column1: "E",
+    column2: "F",
+    column3: "G",
+    column4: (
+      <>
+        <ToggleButton onToggle={() => {}} /> Ativo
+      </>
+    ),
+    column5: (
+      <>
+        <ActionButton>
+          <EyeTable />
+        </ActionButton>
+        <ActionButton>
+          <Pencil />
+        </ActionButton>
+        <ActionButton>
+          <Delete />
+        </ActionButton>
+      </>
+    ),
+  },
 ];
-
 const Plans = () => {
   const [selectedButton, setSelectedButton] = useState<string>("Médicos");
   const [filterOn, setFilterOn] = useState<boolean>(false);
@@ -66,19 +137,16 @@ const Plans = () => {
             setStateFilter={setStateFilter}
             getFilter={fetchProducts}
           />
-          <ButtonAdd
-            text={"Novo Plano"}
-            onClick={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
+          <StyleLinkNewPlan to={"/newplan"}>
+            <ButtonAdd
+              text={"Novo Plano"}
+              onClick={function (): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
+          </StyleLinkNewPlan>
         </StyleDivFilter>
-        <Table data={data} columnNames={columnNames} />
-        <ToggleButton
-          onToggle={function (): void {
-            throw new Error("Function not implemented.");
-          }}
-        />
+          <Table data={data} columnNames={columnNames} />
       </Container>
     </>
   );

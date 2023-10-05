@@ -4,8 +4,8 @@ export type TableData = {
   column1: string;
   column2: string;
   column3: string;
-  column4: string;
-  column5: string;
+  column4: JSX.Element | string;
+  column5: JSX.Element | string;
   
 };
 
