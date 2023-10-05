@@ -146,7 +146,7 @@ const Plans = () => {
             />
           </StyleLinkNewPlan>
         </StyleDivFilter>
-          <Table data={data} columnNames={columnNames} />
+        <Table data={data} columnNames={columnNames} />
       </Container>
     </>
   );

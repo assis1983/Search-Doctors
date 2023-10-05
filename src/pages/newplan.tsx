@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { CustomModal, CloseButton } from "../components/StyleModal/style";
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
 import { StyleLinkUser } from "../components/StyleInputsUser/style";
@@ -12,6 +14,15 @@ import ToggleButton from "../components/ToggleButton";
 import { Button } from "../components/Button";
 
 const NewPlan = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <Menu />
@@ -41,7 +52,9 @@ const NewPlan = () => {
             <ToggleButton onToggle={() => {}} />
           </div>
           <div className="styled-title-active">
-            <Title fontSize={16} color={colors.deepGrey}>Ativo</Title>
+            <Title fontSize={16} color={colors.deepGrey}>
+              Ativo
+            </Title>
           </div>
           <Input
             label={"Período"}
@@ -60,9 +73,13 @@ const NewPlan = () => {
             }}
           />
         </StyleInputUser>
-        <Button text={"Salvar"} variant={"login"} onClick={function (): void {
-                  throw new Error("Function not implemented.");
-              } } />
+        <Button text={"Salvar"} variant={"login"} onClick={openModal} />
+        <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
+          <div>
+            <Title fontSize={32}>Plano Salvo com Sucesso</Title>
+            <CloseButton onClick={closeModal}>X</CloseButton>
+          </div>
+        </CustomModal>
       </Container>
     </>
   );
