@@ -4,6 +4,7 @@ import { apiService } from '../config/apiservice'
 export const getUserInfo = async () => {
   try {
     const response = await apiService.get(`usuario/me`)
+    console.log(response)
 
     if (response.status === 200) {
       return response.data

@@ -44,5 +44,7 @@ export const InputCheckbox = styled.div`
     background: white;
   }
 
-
+  .eyeIconDiv {
+    backgroun-color: blue;
+  }
 `;

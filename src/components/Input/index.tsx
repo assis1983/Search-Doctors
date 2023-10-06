@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { InputCheckbox} from "../Input/style";
+import { InputCheckbox } from "../Input/style";
 import Eye from "../../assets/icons/eye";
 
 type Props = {
@@ -33,7 +33,9 @@ export function Input({
           type={password ? "password" : "text"}
         />
         {password && (
+          <div className="eyeIconDiv">
             <Eye />
+          </div>
         )}
       </InputCheckbox>
     </>

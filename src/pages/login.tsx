@@ -9,6 +9,7 @@ import { Button } from "../components/Button";
 import { Link } from "react-router-dom";
 import { postLogin } from "../services/auth/auth";
 
+
 const Login = () => {
   const [stateLogin, setStateLogin] = useState("");
   const [statePassword, setStatePassword] = useState("");
@@ -16,7 +17,7 @@ const Login = () => {
   const doLogin = async () => {
     const result = await postLogin(stateLogin, statePassword);
     if (result.logged) {
-      window.location.href = "/";
+      window.location.href = "/dashboard";
       return;
     }
     alert(result.message);
