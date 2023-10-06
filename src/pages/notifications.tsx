@@ -1,13 +1,13 @@
-import { Menu } from "../components/SideBar"
-import { Header } from "../components/Header"
+import { Menu } from "../components/SideBar";
+import { Header } from "../components/Header";
 
 const Notifications = () => {
-    return (
-        <>
-        <Menu />
-        <Header />
-        </>
-    )
-}
+  return (
+    <>
+      <Menu />
+      <Header />
+    </>
+  );
+};
 
-export default Notifications
+export default Notifications;
