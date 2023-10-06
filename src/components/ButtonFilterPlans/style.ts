@@ -42,3 +42,7 @@ export const ButtonFilter = styled.button<{ selected: boolean }>`
   font-family: Poppins;
 `;
 
+export const StyleCardButtonDuplo = styled.div`
+  width: 85%;
+  margin-left: auto;
+`

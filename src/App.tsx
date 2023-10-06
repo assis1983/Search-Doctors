@@ -11,6 +11,7 @@ import Specialties from "./pages/specialties";
 import Notifications from "./pages/notifications";
 import TypePlan from "./pages/typeplano";
 import NewEspciality from "./pages/newespeciality";
+import NewNotification from "./pages/newnotification";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/specialties" element={<Specialties />} />
           <Route path="/newspeciality" element={<NewEspciality />} />
           <Route path="/notifications" element={<Notifications />} />
+          <Route path="/newnotification" element={<NewNotification />} />
 
         </Routes>
       </BrowserRouter>

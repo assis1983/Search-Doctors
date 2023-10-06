@@ -9,10 +9,16 @@ export const Container = styled.div`
   border-radius: 40px;
   .input-value {
     input {
-        width: 184px;
-        height: 60px;
+      width: 184px;
+      height: 60px;
     }
-}
+  }
+  .input-messenger {
+    input {
+      width: 850px;
+      height: 200px;
+    }
+  }
 `;
 
 export const MainContainer = styled.div`
