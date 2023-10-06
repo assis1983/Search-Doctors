@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
-import { Title } from "../components/Title/style";
+import { StyledTitle, Title } from "../components/Title/style";
 import { Container, GrayText } from "../components/Container/styles";
 import Table from "../components/Table";
 import { SearchInput } from "../components/Search";
@@ -31,10 +31,13 @@ const RegisterUser = () => {
     <>
       <Menu />
       <Header />
-      <Container>
+      <StyledTitle>
         <Title fontSize={32}>
           Usuários Cadastrados | <GrayText>{selectedButton}</GrayText>
         </Title>
+      </StyledTitle>
+
+      <Container>
         <CardButtonFIlter
           selectedButton={selectedButton}
           setSelectedButton={setSelectedButton}

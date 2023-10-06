@@ -3,7 +3,7 @@ import { api } from '../Api/apiservice'
 
 export const postLogin = async (login: string, password: string) => {
   try {
-    const response = await api.post('/swagger-ui/index.html#/register-controller/login', {
+    const response = await api.post(`public/register/login?email=${login}&password=${password}`, {
       email: login,
       senha: password
     })
@@ -32,3 +32,4 @@ export const postLogin = async (login: string, password: string) => {
     message: 'Email e Senha são Obrigatórios'
   }
 }
+

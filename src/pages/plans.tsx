@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
 import { Container } from "../components/Container/styles";
-import { Title } from "../components/Title/style";
+import { StyledTitle, Title } from "../components/Title/style";
 import CardButtonPlans from "../components/ButtonFilterPlans";
 import { SearchInput } from "../components/Search";
 import { StyleInputs } from "../components/Search/styles";
@@ -112,8 +112,10 @@ const Plans = () => {
     <>
       <Menu />
       <Header />
-      <Container>
+      <StyledTitle>
         <Title fontSize={32}>Planos</Title>
+      </StyledTitle>
+      <Container>
         <CardButtonPlans
           selectedButton={selectedButton}
           setSelectedButton={setSelectedButton}
@@ -137,7 +139,7 @@ const Plans = () => {
             setStateFilter={setStateFilter}
             getFilter={fetchProducts}
           />
-          <StyleLinkNewPlan to={"/newplan"}>  
+          <StyleLinkNewPlan to={"/newplan"}>
             <ButtonAdd
               text={"Novo Plano"}
               onClick={function (): void {

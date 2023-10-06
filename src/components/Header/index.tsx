@@ -4,6 +4,7 @@ import * as S from "../../components/Header/style";
 import { Title } from "../Title/style";
 import { Subtitle } from "../Subtitle/styles";
 import { colors } from "../../theme";
+import { getUserInfo } from "../../services/User/getuser";
 
 export function Header() {
   return (
@@ -12,7 +13,7 @@ export function Header() {
         <User />
         <div>
           <Title fontSize={20} color={colors.black}>
-            Eder
+            {getUserInfo.name}
           </Title>
           <Subtitle>assis.ederjd@gmail.com</Subtitle>
         </div>
