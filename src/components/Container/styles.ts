@@ -6,6 +6,7 @@ export const Container = styled.div`
   margin-left: auto;
   box-shadow: 0px 7px 30px rgba(187, 192, 205, 0.4);
   padding: 1rem;
+  border-radius: 40px;
   .input-value {
     input {
         width: 184px;

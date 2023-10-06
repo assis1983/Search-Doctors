@@ -8,3 +8,8 @@ export const Title = styled.h1<{ fontSize: number; color?: string;  }>`
   padding: 0;
   
 `
+export const StyledTitle = styled.div`
+  width: 85%;
+  margin-left: auto;
+  padding-bottom: 20px;
+`

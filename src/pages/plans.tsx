@@ -137,7 +137,7 @@ const Plans = () => {
             setStateFilter={setStateFilter}
             getFilter={fetchProducts}
           />
-          <StyleLinkNewPlan to={"/newplan"}>
+          <StyleLinkNewPlan to={"/newplan"}>  
             <ButtonAdd
               text={"Novo Plano"}
               onClick={function (): void {

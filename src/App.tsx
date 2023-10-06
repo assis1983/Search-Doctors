@@ -10,6 +10,7 @@ import Faq from "./pages/faq";
 import Specialties from "./pages/specialties";
 import Notifications from "./pages/notifications";
 import TypePlan from "./pages/typeplano";
+import NewEspciality from "./pages/newespeciality";
 
 function App() {
   return (
@@ -26,7 +27,9 @@ function App() {
           <Route path="/typeplan" element={<TypePlan/>} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/specialties" element={<Specialties />} />
+          <Route path="/newspeciality" element={<NewEspciality />} />
           <Route path="/notifications" element={<Notifications />} />
+
         </Routes>
       </BrowserRouter>
     </>
