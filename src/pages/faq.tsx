@@ -31,7 +31,7 @@ const Faq = () => {
       <StyleLinkUser to={"/dashboard"}>
         <CardTitle2
           icon={<ChevronLeft />}
-          text={"FAQ"}
+          text={"Novo FAQ"}
           backgroundColor={colors.light}
         />
       </StyleLinkUser>

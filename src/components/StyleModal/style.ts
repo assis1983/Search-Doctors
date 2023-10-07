@@ -16,6 +16,17 @@ export const CustomModal = styled(Modal)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  .style-deleteplan {
+    display: flex;
+    justify-content: center;
+    background-color: blue;
+  p {
+    display: flex;
+    justify-content: center;
+    background-color: blue;
+  }
+  }
+  
 `;
 
 export const CloseButton = styled.button`

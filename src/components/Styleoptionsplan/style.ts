@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../theme";
 
 export const StyleOptionsPlan = styled.div`
     display: flex;
@@ -7,6 +8,11 @@ export const StyleOptionsPlan = styled.div`
     .pencil {
         margin-left: auto;
         cursor: pointer;
+    }
+    button {
+        border: none;
+        cursor: pointer;
+        background-color: ${colors.white};
     }
 `
 
