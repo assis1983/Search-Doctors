@@ -5,8 +5,10 @@ import { Title } from "../Title/style";
 import { Subtitle } from "../Subtitle/styles";
 import { colors } from "../../theme";
 import { getUserInfo } from "../../services/User/getuser";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {  useEffect, useState } from "react";
+import { api } from "../../services/Api/apiservice";
+import { UserOptionsStyle } from "../../components/Header/style";
 
 type UserInfoType = {
   email: string
@@ -17,12 +19,15 @@ type UserInfoType = {
 export function Header() {
   const [showOptions, setShowOptions] = useState(false)
   const [userInfo, setUserInfo] = useState<UserInfoType>({} as UserInfoType)
+  const navigate = useNavigate()
 
-  // const logout = () => {
-  //   localStorage.clear()
-  //   api.defaults.headers.common.Authorization = ``
-  //   navigate(`/login`, { replace: true })
-  // }
+
+  const logout = () => {
+    localStorage.clear()
+    api.defaults.headers.common.Authorization = ``
+    navigate(`/`, { replace: true })
+  }
+
   useEffect(() => {
     (async () => {
       const result = await getUserInfo()
@@ -49,6 +54,15 @@ export function Header() {
           <ChevronDown />
         </button>
       </S.UserHeadStyle>
+      {showOptions && (
+        <UserOptionsStyle>
+          <div>
+            <button className="logout" type="button" onClick={logout}>
+              Sair
+            </button>
+          </div>
+        </UserOptionsStyle>  
+          )}
     </S.HeaderStyle>
   );
 }
