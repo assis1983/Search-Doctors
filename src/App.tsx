@@ -12,15 +12,36 @@ import Notifications from "./pages/notifications";
 import TypePlan from "./pages/typeplano";
 import NewEspciality from "./pages/newespeciality";
 import NewNotification from "./pages/newnotification";
+// import { AuthContext, AuthProvider } from "./contexts/AuthContext";
+// import { useContext } from "react";
+
+// export function PrivateRoutesAccess({
+//   children
+// }: {
+//   children: React.ReactNode
+// }) {
+//   const { authentified } = useContext(AuthContext)
+//   if (!authentified) {
+//     return <Navigate to="/login" />
+//   }
+//   return <>{children}</>
+// }
+
 
 function App() {
   return (
     <>
       <GlobalStyles />
+      {/* <AuthProvider> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Login />}/>
+          <Route path="/dashboard" element={
+                // <PrivateRoutesAccess>
+                  <Dashboard />
+                // </PrivateRoutesAccess>
+              }
+            />
           <Route path="/registeruser" element={<RegisterUser />} />
           <Route path="/clientesdetails" element={<ClientesDetails />} />
           <Route path="/plans" element={<Plans />} />
@@ -31,9 +52,10 @@ function App() {
           <Route path="/newspeciality" element={<NewEspciality />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/newnotification" element={<NewNotification />} />
-
         </Routes>
       </BrowserRouter>
+      {/* </AuthProvider> */}
+      
     </>
   );
 }

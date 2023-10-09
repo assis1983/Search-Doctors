@@ -1,30 +1,33 @@
-import axios from 'axios'
-import { apiService } from '../config/apiservice'
+import axios from 'axios';
+import { api } from '../Api/apiservice';
 
 export const getUserInfo = async () => {
   try {
-    const response = await apiService.get(`usuario/me`)
-    console.log(response)
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return { message: 'Token de autorização ausente' };
+    }
 
+    const response = await api.get('/me', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log(response)
     if (response.status === 200) {
-      return response.data
+      return response.data;
     }
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 401) {
-        return { message: 'Usuário não autenticado.' }
+        return { message: 'Credenciais Inválidas' };
       }
-      if (error.response?.status === 403) {
-        return { message: 'Usuário não possui permissão de acesso.' }
-      }
+
       if (error.response?.status === 404) {
-        return { message: 'Página não encontrada' }
+        return { message: 'Página não encontrada' };
       }
     }
   }
+};
 
-  return {
-    message:
-      'Erro não identificado (favor entrar em contato com os desenvolvedores)',
-  }
-}
+

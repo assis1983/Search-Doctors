@@ -1,35 +1,39 @@
-import axios from 'axios'
-import { api } from '../Api/apiservice'
+import axios from 'axios';
+import { api } from '../Api/apiservice';
 
 export const postLogin = async (login: string, password: string) => {
   try {
-    const response = await api.post(`public/register/login?email=${login}&password=${password}`, {
+    
+    const authResponse = await api.post(`public/register/login?email=${login}&password=${password}`, {
       email: login,
-      senha: password
-    })
+      senha: password,
+    },
+    );
 
-    if (response.status === 200) {
-      api.defaults.headers.common.Authorization = `${response.data.type} ${response.data.token}`
-      localStorage.setItem('token', JSON.stringify(response.data))
+    if (authResponse.status === 200) {
+      const token = authResponse.data.token;
+
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      localStorage.setItem('token', token);
+
       return {
-        logged: true
-      }
+        logged: true,
+      };
     }
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 401) {
-        return { logged: false, message: 'Credenciais Inválidas' }
+        return { logged: false, message: 'Credenciais Inválidas' };
       }
-
       if (error.response?.status === 404) {
-        return { logged: false, message: 'Página Não Encontrada' }
+        return { logged: false, message: 'Página Não Encontrada' };
       }
     }
   }
 
   return {
     logged: false,
-    message: 'Email e Senha são Obrigatórios'
-  }
-}
+    message: 'Email e Senha são Obrigatórios',
+  };
+};
 
