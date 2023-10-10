@@ -51,7 +51,7 @@ export const UserOptionsStyle = styled.div`
     cursor: pointer;
     font-size: 20px;
     margin-top: 7rem;
-    margin-left: -8rem;
+    margin-left: -5rem;
     z-index: 999;
   }
 `

@@ -7,103 +7,44 @@ import { StyleDivFilter } from "../components/Filter/styles";
 import { StyleInputs } from "../components/Search/styles";
 import { SearchInput } from "../components/Search";
 import { FilterButton } from "../components/Filter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleLinkNewPlan } from "../components/Filter/styles";
-import Table from "../components/Table";
-import { ActionButton } from "../components/ToggleButton/style";
+import { Table } from "../components/Table";
+import ToggleButton from "../components/ToggleButton";
+import { getSpecialties } from "../services/Especialities/getSpecialties";
 import EyeTable from "../assets/icons/eyetable";
 import Pencil from "../assets/icons/pencil";
 import Delete from "../assets/icons/delete";
-import ToggleButton from "../components/ToggleButton";
-import { Link } from "react-router-dom";
 
-const columnNames = {
-  column1: "Nome Especialidade",
-  column4: "Situação",
-  column5: "Ações",
-};
+type SpecialtiesType = {
+  name: string;
+  active: true;
+}[];
 
-const data = [
-  {
-    column1: <Link to={"/typeplan"}>Teste</Link>,
-    column2: "B",
-    column3: "C",
-    column4: (
-      <>
-        <ToggleButton onToggle={() => {}} /> Ativo
-      </>
-    ),
-    column5: (
-      <>
-        <ActionButton>
-          <EyeTable />
-        </ActionButton>
-        <ActionButton>
-          <Pencil />
-        </ActionButton>
-        <ActionButton>
-          <Delete />
-        </ActionButton>
-      </>
-    ),
-  },
-  {
-    column1: "Odontologia",
-    column2: "F",
-    column3: "G",
-    column4: (
-      <>
-        <ToggleButton onToggle={() => {}} /> Ativo
-      </>
-    ),
-    column5: (
-      <>
-        <ActionButton>
-          <EyeTable />
-        </ActionButton>
-        <ActionButton>
-          <Pencil />
-        </ActionButton>
-        <ActionButton>
-          <Delete />
-        </ActionButton>
-      </>
-    ),
-  },
-  {
-    column1: "Neurologia",
-    column2: "F",
-    column3: "G",
-    column4: (
-      <>
-        <ToggleButton onToggle={() => {}} /> Ativo
-      </>
-    ),
-    column5: (
-      <>
-        <ActionButton>
-          <EyeTable />
-        </ActionButton>
-        <ActionButton>
-          <Pencil />
-        </ActionButton>
-        <ActionButton>
-          <Delete />
-        </ActionButton>
-      </>
-    ),
-  },
-];
+const tableTitle = ["Nome Especialidade", "Situação", "Ações"];
 
 const Specialties = () => {
+  const [specialties, setSpecialties] = useState<SpecialtiesType>(
+    [] as SpecialtiesType
+  );
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [stateFilter, setStateFilter] = useState<
     "TODOS" | "EM_ALTA" | "EM_BAIXA"
   >("TODOS");
 
-  function fetchProducts(): void {
-    throw new Error("Function not implemented.");
-  }
+  const fetchSpecialties = async () => {
+    const result = await getSpecialties();
+    if (result.message) {
+      alert(result.message);
+    } else {
+      setSpecialties(result);
+    }
+  };
+
+  useEffect(() => {
+    fetchSpecialties();
+  }, []);
+
   return (
     <>
       <Menu />
@@ -129,7 +70,7 @@ const Specialties = () => {
             button={setFilterOn}
             stateFilter={stateFilter}
             setStateFilter={setStateFilter}
-            getFilter={fetchProducts}
+            getFilter={fetchSpecialties}
           />
           <StyleLinkNewPlan to={"/newspeciality"}>
             <ButtonAdd
@@ -140,7 +81,30 @@ const Specialties = () => {
             />
           </StyleLinkNewPlan>
         </StyleDivFilter>
-        <Table data={data} columnNames={columnNames} />
+        <Table headersArray={tableTitle}>
+          {specialties.map((item) => (
+            <tr
+              // className="tableItems"
+              // onClick={() => goToPage(`/produto/${item.id}`)}
+              style={{ cursor: "pointer" }}
+            >
+              <td>{item.name}</td>
+              <td>
+                {item.active}
+                <ToggleButton
+                  onToggle={function (): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                />
+              </td>
+              <td>
+                <EyeTable />
+                <Pencil />
+                <Delete />
+              </td>
+            </tr>
+          ))}
+        </Table>
       </Container>
     </>
   );

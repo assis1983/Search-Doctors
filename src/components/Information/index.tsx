@@ -12,11 +12,14 @@ export default function Information() {
           <Woman />
         </S.StyledWoman>
         <p>Seja bem vinda!</p>
-        <p className="phrase">Neste painel você poderá administrar <br/>seu site de forma simples e prática.</p>
+        <p className="phrase">
+          Neste painel você poderá administrar <br />
+          seu site de forma simples e prática.
+        </p>
       </S.StyledRetangle>
       <NewDate />
       <StyleHeaderCards>
-        <MainHeader title={"Médicos"} children={undefined} />
+        <MainHeader title="Médicos" children={undefined}></MainHeader>
         <MainHeader title={"Contratantes"} children={undefined} />
       </StyleHeaderCards>
     </>

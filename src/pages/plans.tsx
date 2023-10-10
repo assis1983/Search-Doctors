@@ -9,104 +9,48 @@ import { StyleInputs } from "../components/Search/styles";
 import { FilterButton } from "../components/Filter";
 import { StyleDivFilter } from "../components/Filter/styles";
 import { ButtonAdd } from "../components/ButtonAdd";
-import Table from "../components/Table";
-import ToggleButton from "../components/ToggleButton";
-import { ActionButton } from "../components/ToggleButton/style";
-import EyeTable from "../assets/icons/eyetable";
-import Pencil from "../assets/icons/pencil";
-import Delete from "../assets/icons/delete";
+import { Table } from "../components/Table";
+// import ToggleButton from "../components/ToggleButton";
+// import { ActionButton } from "../components/ToggleButton/style";
+// import EyeTable from "../assets/icons/eyetable";
+// import Pencil from "../assets/icons/pencil";
+// import Delete from "../assets/icons/delete";
 import { StyleLinkNewPlan } from "../components/Filter/styles";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import { getPlans } from "../services/Plans/getPlans";
+// import EyeTable from "../assets/icons/eyetable";
+// import Pencil from "../assets/icons/pencil";
 
-const columnNames = {
-  column1: "",
-  column2: "Valor",
-  column3: "Preço Promocional",
-  column4: "Situação",
-  column5: "Ações",
-};
+// type PlansType = {
+//   id: number;
+//   values: number;
+//   planTitle: string;
+//   period: string;
+//   type: string;
+// }[];
 
-const data = [
-  {
-    column1: <Link to={"/typeplan"}>Teste</Link>,
-    column2: "B",
-    column3: "C",
-    column4: (
-      <>
-        <ToggleButton onToggle={() => {}} /> Ativo
-      </>
-    ),
-    column5: (
-      <>
-        <ActionButton>
-          <EyeTable />
-        </ActionButton>
-        <ActionButton>
-          <Pencil />
-        </ActionButton>
-        <ActionButton>
-          <Delete />
-        </ActionButton>
-      </>
-    ),
-  },
-  {
-    column1: "E",
-    column2: "F",
-    column3: "G",
-    column4: (
-      <>
-        <ToggleButton onToggle={() => {}} /> Ativo
-      </>
-    ),
-    column5: (
-      <>
-        <ActionButton>
-          <EyeTable />
-        </ActionButton>
-        <ActionButton>
-          <Pencil />
-        </ActionButton>
-        <ActionButton>
-          <Delete />
-        </ActionButton>
-      </>
-    ),
-  },
-  {
-    column1: "E",
-    column2: "F",
-    column3: "G",
-    column4: (
-      <>
-        <ToggleButton onToggle={() => {}} /> Ativo
-      </>
-    ),
-    column5: (
-      <>
-        <ActionButton>
-          <EyeTable />
-        </ActionButton>
-        <ActionButton>
-          <Pencil />
-        </ActionButton>
-        <ActionButton>
-          <Delete />
-        </ActionButton>
-      </>
-    ),
-  },
-];
+const TableTitle = ["", "Valor", "Preço Promocional", "Situação", "Ações"];
+
 const Plans = () => {
+  // const [plans, setPlans] = useState<PlansType>([] as PlansType);
   const [selectedButton, setSelectedButton] = useState<string>("Médicos");
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [stateFilter, setStateFilter] = useState<
     "TODOS" | "EM_ALTA" | "EM_BAIXA"
   >("TODOS");
 
-  function fetchProducts(): void {
-    throw new Error("Function not implemented.");
-  }
+  // const fetchPlans = async () => {
+  //   const result = await getPlans();
+  //   if (result.message) {
+  //     alert(result.message);
+  //   } else {
+  //     setPlans(result);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchPlans();
+  // }, []);
 
   return (
     <>
@@ -137,7 +81,9 @@ const Plans = () => {
             button={setFilterOn}
             stateFilter={stateFilter}
             setStateFilter={setStateFilter}
-            getFilter={fetchProducts}
+            getFilter={function (): void {
+              throw new Error("Function not implemented.");
+            }}
           />
           <StyleLinkNewPlan to={"/newplan"}>
             <ButtonAdd
@@ -148,7 +94,23 @@ const Plans = () => {
             />
           </StyleLinkNewPlan>
         </StyleDivFilter>
-        <Table data={data} columnNames={columnNames} />
+        <Table headersArray={TableTitle} children={undefined}>
+          {/* {plans.map((item) => (
+            <tr
+              // className="tableItems"
+              // onClick={() => goToPage(`/produto/${item.id}`)}
+              key={item.id}
+              style={{ cursor: "pointer" }}
+            >
+              <td>{item.planTitle}</td>
+              <td>{item.type}</td>
+              <td>
+                <EyeTable />
+                <Pencil />
+              </td>
+            </tr>
+          ))} */}
+        </Table>
       </Container>
     </>
   );

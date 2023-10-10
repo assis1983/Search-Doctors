@@ -3,25 +3,20 @@ import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
 import { StyledTitle, Title } from "../components/Title/style";
 import { Container, GrayText } from "../components/Container/styles";
-import Table from "../components/Table";
+import { Table } from "../components/Table";
 import { SearchInput } from "../components/Search";
 import { StyleInputs } from "../components/Search/styles";
 import SelectDays from "../components/SelectFilter";
 import CardButtonFIlter from "../components/ButtonsFilter";
-import { Link } from "react-router-dom";
 
-const columnNames = {
-  column1: "Usuário",
-  column2: "Email",
-  column3: "WhatsApp",
-  column4: "Especialidade",
-  column5: "Tipo de Usuário",
-};
-
-const data = [
-  { column1: "A", column2: "B", column3: "C", column4: "D", column5: "E" },
-  { column1: "E", column2: "F", column3: "G", column4: "H", column5: "E" },
-  { column1: "E", column2: "F", column3: "G", column4: "H", column5: "E" },
+const tableTitle = [
+  "Usuário",
+  "Email",
+  "WhatsApp",
+  "Especialidade",
+  "Cidade",
+  "Estado",
+  "Tipo de Usuário",
 ];
 
 const RegisterUser = () => {
@@ -62,9 +57,7 @@ const RegisterUser = () => {
             <p>1.200</p>
           </div>
         </StyleInputs>
-        <Link to={"/clientesdetails"}>
-          <Table data={data} columnNames={columnNames} />
-        </Link>
+        <Table headersArray={tableTitle} children={undefined} />
       </Container>
     </>
   );

@@ -1,18 +1,19 @@
 import axios from 'axios';
 import { api } from '../Api/apiservice';
 
-export const getUserInfo = async () => {
+export const getPlans = async () => {
   try {
     const token = localStorage.getItem('token');
     if (!token) {
       return { message: 'Token de autorização ausente' };
     }
 
-    const response = await api.get('/me', {
+    const response = await api.get('/plans', {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
+    console.log(response)
     if (response.status === 200) {
       return response.data;
     }
