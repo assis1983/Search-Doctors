@@ -33,7 +33,7 @@ const TypePlan = () => {
       <Menu />
       <Header />
       <StyleOptionsPlan>
-        <StyleLinkUser to={"/dashboard"}>
+        <StyleLinkUser to={"/plans"}>
           <CardTitle2
             icon={<ChevronLeft />}
             text={"Planos"}

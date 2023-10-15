@@ -27,6 +27,7 @@ export const UserHeadStyle = styled.div`
 `
 
 export const UserOptionsStyle = styled.div`
+  display: flex;
   align-items: baseline;
   background-color: ${colors.white};
   border-radius: 24px;
@@ -34,14 +35,13 @@ export const UserOptionsStyle = styled.div`
   right: 10px;
   > div {
     button {
-      width: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 6rem;
       height: 3rem;
     }
-    display: flex;
-    gap: 10px;
-    &:first-child {
-      border-bottom: 2px solid ${colors.grey};
-    }
+    
   }
 
   .logout {
@@ -54,4 +54,8 @@ export const UserOptionsStyle = styled.div`
     margin-left: -5rem;
     z-index: 999;
   }
+    .button-users {
+      display: flex;
+      flex-direction: column;
+    }
 `

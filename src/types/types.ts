@@ -6,10 +6,32 @@ export type Variant =
   | "active"
   | "inactive";
 
-export type ProductClientType = {
-  id: number;
-  nome: string;
-  percentual: number;
-};
+  type Pagination = {
+    pageable: {
+      pageNumber: number
+      pageSize: number
+      sort: {
+        empty: boolean
+        unsorted: boolean
+        sorted: boolean
+      }
+      offset: number
+      paged: boolean
+      unpaged: boolean
+    }
+    last: boolean
+    totalPages: number
+    totalElements: number
+    size: number
+    number: number
+    sort: {
+      empty: boolean
+      unsorted: boolean
+      sorted: boolean
+    }
+    first: boolean
+    numberOfElements: number
+    empty: boolean
+  }
 
-export type ProductClientArray = ProductClientType[];
+export default Pagination

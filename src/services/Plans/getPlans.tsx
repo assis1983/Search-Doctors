@@ -1,33 +1,26 @@
-import axios from 'axios';
-import { api } from '../Api/apiservice';
+import { AxiosResponse } from "axios";
+import { api } from "../Api/apiservice";
+import Pagination from "../../types/types";
+
+type PlansApi = Pagination & {
+  content: {
+    id: number;
+    name: string;
+    enabled: boolean;
+  }[];
+};
 
 export const getPlans = async () => {
   try {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return { message: 'Token de autorização ausente' };
-    }
-
-    const response = await api.get('/plans', {
+    const token = localStorage.getItem("token");
+    const result: AxiosResponse<PlansApi> = await api.get("/plans", {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
-    console.log(response)
-    if (response.status === 200) {
-      return response.data;
-    }
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response?.status === 401) {
-        return { message: 'Credenciais Inválidas' };
-      }
 
-      if (error.response?.status === 404) {
-        return { message: 'Página não encontrada' };
-      }
-    }
+    return result.data.content;
+  } catch (error) {
+    console.log(error);
   }
 };
-
-

@@ -64,6 +64,8 @@ const NewPlan = () => {
               throw new Error("Function not implemented.");
             }}
           />
+        </StyleInputUser>
+        <div>
           <Input
             label={"Valor"}
             placeholder={""}
@@ -72,7 +74,7 @@ const NewPlan = () => {
               throw new Error("Function not implemented.");
             }}
           />
-        </StyleInputUser>
+        </div>
         <Button text={"Salvar"} variant={"login"} onClick={openModal} />
         <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
           <div>

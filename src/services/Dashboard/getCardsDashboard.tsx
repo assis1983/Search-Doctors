@@ -1,21 +1,23 @@
 import axios from "axios";
+import { AxiosResponse } from "axios";
 import { api } from "../Api/apiservice";
+import Pagination from "../../types/types";
 
-export const getDashboarUsers = async () => {
+type CardsApi = Pagination & {
+  total: number;
+  available: number;
+  unavailable: number;
+};
+
+export const getCards = async () => {
   try {
     const token = localStorage.getItem("token");
-    if (!token) {
-      return { message: "Token de autorização ausente" };
-    }
-
-    const response = await api.get("/users", {
+    const result: AxiosResponse<CardsApi> = await api.get("/users/dashboard", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    if (response.status === 200) {
-      return response.data;
-    }
+    return result.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 401) {

@@ -7,7 +7,7 @@ import { StyleDivFilter } from "../components/Filter/styles";
 import { StyleInputs } from "../components/Search/styles";
 import { SearchInput } from "../components/Search";
 import { FilterButton } from "../components/Filter";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { StyleLinkNewPlan } from "../components/Filter/styles";
 import { Table } from "../components/Table";
 import ToggleButton from "../components/ToggleButton";
@@ -17,16 +17,19 @@ import Pencil from "../assets/icons/pencil";
 import Delete from "../assets/icons/delete";
 
 type SpecialtiesType = {
+  id: number;
   name: string;
-  active: true;
+  enabled: ReactNode;
+  actions: ReactNode;
 }[];
-
-const tableTitle = ["Nome Especialidade", "Situação", "Ações"];
 
 const Specialties = () => {
   const [specialties, setSpecialties] = useState<SpecialtiesType>(
     [] as SpecialtiesType
   );
+
+  const tableTitle = ["Nome Especialidade", "Situação", "Ações"];
+
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [stateFilter, setStateFilter] = useState<
     "TODOS" | "EM_ALTA" | "EM_BAIXA"
@@ -82,22 +85,20 @@ const Specialties = () => {
           </StyleLinkNewPlan>
         </StyleDivFilter>
         <Table headersArray={tableTitle}>
-          {specialties.map((item) => (
-            <tr
-              // className="tableItems"
-              // onClick={() => goToPage(`/produto/${item.id}`)}
-              style={{ cursor: "pointer" }}
-            >
-              <td>{item.name}</td>
-              <td>
-                {item.active}
+          {specialties.map((index) => (
+            <tr key={index.id} style={{ cursor: "pointer" }}>
+              <td>{index.name}</td>
+              <td className="toogle">
+                {index.enabled}
                 <ToggleButton
                   onToggle={function (): void {
                     throw new Error("Function not implemented.");
                   }}
                 />
+                {"Ativo"}
               </td>
               <td>
+                {index.actions}
                 <EyeTable />
                 <Pencil />
                 <Delete />

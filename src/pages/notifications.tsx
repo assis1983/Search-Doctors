@@ -18,16 +18,14 @@ import { getNotification } from "../services/Notifications/getNotifications";
 type NotificationsType = {
   id: number;
   title: string;
-  message: string;
-  updatedAt: string;
+  updatedAt: number;
 }[];
-
-const productTableTitle = ["Título", "Data de Envio", "Ações"];
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState<NotificationsType>(
     [] as NotificationsType
   );
+  const productTableTitle = ["Título", "Data de Envio", "Ações"];
   const [selectedButton, setSelectedButton] = useState<string>("Médicos");
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [stateFilter, setStateFilter] = useState<

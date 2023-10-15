@@ -7,13 +7,15 @@ type Props = {
 
 export function Table({ headersArray, children }: Props) {
   return (
-    <S.TableStyle>
-      <tr>
-        {headersArray.map((headers, index) => (
-          <th key={index}>{headers}</th>
-        ))}
-      </tr>
-      {children}
-    </S.TableStyle>
+    <S.StyldeDivTable>
+      <S.TableStyle>
+        <tr>
+          {headersArray.map((headers, index) => (
+            <th key={index}>{headers}</th>
+          ))}
+        </tr>
+        {children}
+      </S.TableStyle>
+    </S.StyldeDivTable>
   );
 }

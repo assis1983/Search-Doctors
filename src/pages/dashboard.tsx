@@ -5,41 +5,33 @@ import { StyledInformation } from "../components/Information/style";
 import * as S from "../components/TableContainer/styles";
 import { Table } from "../components/Table";
 import Arrow from "../assets/icons/arrow";
-// import { useEffect, useState } from "react";
-// import { getDashboarUsers } from "../services/Dashboard/getDashboardClients";
+import { useState, useEffect } from "react";
+import { getUserLast } from "../services/User/getUserLast";
 
-// type UserType = {
-//   id: number;
-//   email: string;
-//   phone: number;
-//   firstName: string;
-//   lastName: string;
-// }[];
-
-const TableTitle = ["Usuário", "E-mail", "WhatsApp", "Tipo de Usuário"];
+type LastType = {
+  id: number;
+  email: string;
+  phone: string;
+  firstName: string;
+  profiles: { name: string }[];
+}[];
 
 const Dashboard = () => {
-  // const [users, setUsers] = useState<UserType>([] as UserType);
-  // const [selectedButton, setSelectedButton] = useState<string>("Médicos");
-  // const [filterOn, setFilterOn] = useState<boolean>(false);
-  // const [stateFilter, setStateFilter] = useState<
-  //   "TODOS" | "EM_ALTA" | "EM_BAIXA"
-  // >("TODOS");
+  const TableTitle = ["Usuário", "E-mail", "WhatsApp", "Tipo de Usuário"];
+  const [userLast, setUserLast] = useState<LastType>([] as LastType);
 
-  // const fetchUsers = async () => {
-  //   const result = await getDashboarUsers();
-  //   console.log(result);
+  const fetchUserLast = async () => {
+    const result = await getUserLast();
+    if (result.message) {
+      alert(result.message);
+    } else {
+      setUserLast(result);
+    }
+  };
 
-  //   if (result.message) {
-  //     alert(result.message);
-  //   } else {
-  //     setUsers(result);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []);
+  useEffect(() => {
+    fetchUserLast();
+  }, []);
 
   return (
     <>
@@ -51,22 +43,21 @@ const Dashboard = () => {
       <S.TableContainer>
         <S.StyleDateTable>
           <p>Últimos Usuários Cadastrados</p>
-          <S.StyleLink to={""}>
+          <S.StyleLink to={"/registeruser"}>
             Ver tudo <Arrow />
           </S.StyleLink>
         </S.StyleDateTable>
-        <Table headersArray={TableTitle} children={undefined}>
-          {/* {users.map((item) => (
-            <tr
-              // className="tableItems"
-              // onClick={() => goToPage(`/produto/${item.id}`)}
-              key={item.id}
-              style={{ cursor: "pointer" }}
-            >
-              <td>{item.email}</td>
+        <Table headersArray={TableTitle}>
+          {userLast.map((item) => (
+            <tr key={item.id}>
               <td>{item.firstName}</td>
+              <td>{item.email}</td>
+              <td>{item.phone}</td>
+              <td>
+                {item.profiles.map((profile) => profile.name).join(", ")}
+              </td>{" "}
             </tr>
-          ))} */}
+          ))}
         </Table>
       </S.TableContainer>
     </>

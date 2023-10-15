@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
 import { Container } from "../components/Container/styles";
@@ -10,47 +10,54 @@ import { FilterButton } from "../components/Filter";
 import { StyleDivFilter } from "../components/Filter/styles";
 import { ButtonAdd } from "../components/ButtonAdd";
 import { Table } from "../components/Table";
-// import ToggleButton from "../components/ToggleButton";
-// import { ActionButton } from "../components/ToggleButton/style";
-// import EyeTable from "../assets/icons/eyetable";
-// import Pencil from "../assets/icons/pencil";
-// import Delete from "../assets/icons/delete";
+import ToggleButton from "../components/ToggleButton";
 import { StyleLinkNewPlan } from "../components/Filter/styles";
-// import { Link } from "react-router-dom";
-// import { getPlans } from "../services/Plans/getPlans";
-// import EyeTable from "../assets/icons/eyetable";
-// import Pencil from "../assets/icons/pencil";
+import { getPlans } from "../services/Plans/getPlans";
+import EyeTable from "../assets/icons/eyetable";
+import Pencil from "../assets/icons/pencil";
+import Delete from "../assets/icons/delete";
+import { useNavigate } from "react-router-dom";
 
-// type PlansType = {
-//   id: number;
-//   values: number;
-//   planTitle: string;
-//   period: string;
-//   type: string;
-// }[];
-
-const TableTitle = ["", "Valor", "Preço Promocional", "Situação", "Ações"];
+type PlansType = {
+  id: number;
+  planTitle: string;
+  enabled: ReactNode;
+  actions: ReactNode;
+  values: number;
+  period: string;
+}[];
 
 const Plans = () => {
-  // const [plans, setPlans] = useState<PlansType>([] as PlansType);
+  const TableTitle = [
+    "Plano",
+    "Valor",
+    "Preço Promocional",
+    "Situação",
+    "Ações",
+  ];
+  const [plans, setPlans] = useState<PlansType>([] as PlansType);
   const [selectedButton, setSelectedButton] = useState<string>("Médicos");
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [stateFilter, setStateFilter] = useState<
     "TODOS" | "EM_ALTA" | "EM_BAIXA"
   >("TODOS");
+  const navigate = useNavigate();
 
-  // const fetchPlans = async () => {
-  //   const result = await getPlans();
-  //   if (result.message) {
-  //     alert(result.message);
-  //   } else {
-  //     setPlans(result);
-  //   }
-  // };
+  const goToPage = (url: string) => {
+    navigate(url);
+  };
+  const fetchPlans = async () => {
+    const result = await getPlans();
+    if (result.message) {
+      alert(result.message);
+    } else {
+      setPlans(result);
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchPlans();
-  // }, []);
+  useEffect(() => {
+    fetchPlans();
+  }, []);
 
   return (
     <>
@@ -94,22 +101,34 @@ const Plans = () => {
             />
           </StyleLinkNewPlan>
         </StyleDivFilter>
-        <Table headersArray={TableTitle} children={undefined}>
-          {/* {plans.map((item) => (
+        <Table headersArray={TableTitle}>
+          {plans.map((item) => (
             <tr
-              // className="tableItems"
-              // onClick={() => goToPage(`/produto/${item.id}`)}
+              className="tableItems"
               key={item.id}
+              onClick={() => goToPage(`/typeplan`)}
               style={{ cursor: "pointer" }}
             >
-              <td>{item.planTitle}</td>
-              <td>{item.type}</td>
+              <td>{item.period}</td>
+              <td>{item.values}</td>
+              <td>{item.values}</td>
+              <td className="toogle">
+                {item.enabled}
+                <ToggleButton
+                  onToggle={function (): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                />
+                Ativo
+              </td>
               <td>
+                {item.actions}
                 <EyeTable />
                 <Pencil />
+                <Delete />
               </td>
             </tr>
-          ))} */}
+          ))}
         </Table>
       </Container>
     </>

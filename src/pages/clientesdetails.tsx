@@ -19,12 +19,12 @@ const ClientesDetails = () => {
     <>
       <Menu />
       <Header />
-      <StyleLinkUser to="/dashboard">
-          <CardTitle2
-            icon={<ChevronLeft />}
-            text={"Usuário"}
-            backgroundColor={colors.light}
-          />
+      <StyleLinkUser to="/registeruser">
+        <CardTitle2
+          icon={<ChevronLeft />}
+          text={"Usuário"}
+          backgroundColor={colors.light}
+        />
       </StyleLinkUser>
       <Container>
         <Title fontSize={20}>Dados Pessoais</Title>

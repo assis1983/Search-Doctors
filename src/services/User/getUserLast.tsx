@@ -3,22 +3,24 @@ import { AxiosResponse } from "axios";
 import { api } from "../Api/apiservice";
 import Pagination from "../../types/types";
 
-type PlansApi = Pagination & {
+type UserLastApi = Pagination & {
   content: {
     id: number;
-    name: string;
-    enabled: boolean;
+    email: string;
   }[];
 };
 
-export const getNotification = async () => {
+export const getUserLast = async () => {
   try {
     const token = localStorage.getItem("token");
-    const result: AxiosResponse<PlansApi> = await api.get("/notifications", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const result: AxiosResponse<UserLastApi> = await api.get(
+      "/users/profile?type",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     return result.data.content;
   } catch (error) {
