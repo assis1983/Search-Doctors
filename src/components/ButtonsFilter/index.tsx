@@ -4,17 +4,32 @@ import {
   ButtonFilter,
   ContainerFilter,
 } from "./style";
+import { getCount } from "../../services/User/getCount";
+import { useState, useEffect } from "react";
 
 type CardProps = {
   selectedButton: string;
   setSelectedButton: (buttonText: string) => void;
 };
 
-// eslint-disable-next-line no-empty-pattern
 const CardButtonFIlter = ({ selectedButton, setSelectedButton }: CardProps) => {
+  const [totalContractor, setTotalContractor] = useState<number>(0);
+  const [totalUsers, setTotalUsers] = useState<number>(0);
+  const [totalDoctors, seetTotalDoctors] = useState<number>(0);
+
   const handleButtonClick = (buttonText: string) => {
     setSelectedButton(buttonText);
   };
+
+  useEffect(() => {
+    getCount().then((result) => {
+      if (result) {
+        setTotalContractor(result.totalContractor);
+        setTotalUsers(result.total);
+        seetTotalDoctors(result.totalDoctors);
+      }
+    });
+  }, []);
 
   return (
     <ContainerFilter>
@@ -27,7 +42,7 @@ const CardButtonFIlter = ({ selectedButton, setSelectedButton }: CardProps) => {
           >
             Todos
           </ButtonFilter>
-          <p>1200</p>
+          <p>{totalUsers}</p>
         </ButtonContainerFilter>
       </CardContainerFilter>
       <CardContainerFilter>
@@ -39,7 +54,7 @@ const CardButtonFIlter = ({ selectedButton, setSelectedButton }: CardProps) => {
           >
             Contratantes
           </ButtonFilter>
-          <p>200</p>
+          <p>{totalContractor}</p>
         </ButtonContainerFilter>
       </CardContainerFilter>
       <CardContainerFilter>
@@ -51,7 +66,7 @@ const CardButtonFIlter = ({ selectedButton, setSelectedButton }: CardProps) => {
           >
             Médicos
           </ButtonFilter>
-          <p>1000</p>
+          <p>{totalDoctors}</p>
         </ButtonContainerFilter>
       </CardContainerFilter>
     </ContainerFilter>

@@ -26,8 +26,9 @@ export const InputCheckbox = styled.div`
   }
 
   input {
+    position: aboslute;
     margin-left: -1.5rem;
-    height: 1.5rem;
+    height: 3rem;
     width: 25rem;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
@@ -45,6 +46,9 @@ export const InputCheckbox = styled.div`
   }
 
   .eyeIconDiv {
-    backgroun-color: blue;
+    position: relative;
+    cursor: pointer;
+    left: 340px;
+    top: -30px;
   }
 `;

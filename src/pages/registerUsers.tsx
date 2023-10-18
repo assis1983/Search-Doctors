@@ -8,6 +8,7 @@ import { SearchInput } from "../components/Search";
 import { StyleInputs } from "../components/Search/styles";
 import CardButtonFIlter from "../components/ButtonsFilter";
 import { getUser } from "../services/User/getUsersDetails";
+import { getCount } from "../services/User/getCount";
 import { useNavigate } from "react-router-dom";
 
 type UserType = {
@@ -32,6 +33,9 @@ const RegisterUser = () => {
   ];
   const [cad, setCad] = useState<UserType>([] as UserType);
   const [selectedButton, setSelectedButton] = useState<string>("Todos");
+  const [totalUsers, setTotalUsers] = useState<number>(0);
+  const [searchParam, setSearchParam] = useState<string>("");
+
   const navigate = useNavigate();
 
   const goToPage = (url: string) => {
@@ -47,8 +51,20 @@ const RegisterUser = () => {
     }
   };
 
+  const handleSearchClick = () => {
+    const filteredUsers = cad.filter((item) =>
+      item.lastName.toLowerCase().includes(searchParam.toLowerCase())
+    );
+    setCad(filteredUsers);
+  };
+
   useEffect(() => {
     fetchUsers();
+    getCount().then((result) => {
+      if (result) {
+        setTotalUsers(result.total);
+      }
+    });
   }, []);
 
   return (
@@ -69,25 +85,21 @@ const RegisterUser = () => {
 
         <StyleInputs>
           <SearchInput
-            searchParam={""}
-            setSearchParam={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-            onClick={function (): void {
-              throw new Error("Function not implemented.");
-            }}
+            searchParam={searchParam}
+            setSearchParam={setSearchParam}
+            onClick={handleSearchClick}
           />
 
           <div className="quantity">
             <Title fontSize={16}>Total de Usuários</Title>
-            <p>{}</p>
+            <p>{totalUsers}</p>
           </div>
         </StyleInputs>
         <Table headersArray={tableTitle}>
           {cad.map((item) => (
             <tr
               key={item.id}
-              onClick={() => goToPage(`/clientesdetails`)}
+              onClick={() => goToPage(`/clientesdetails/`)}
               style={{ cursor: "pointer" }}
             >
               <td>{item.lastName}</td>
@@ -97,7 +109,7 @@ const RegisterUser = () => {
                 {item.specialties.map((specialty) => specialty.name).join(", ")}
               </td>{" "}
               <td>teste</td>
-              <td>teste</td>
+              <td>teste</td>{" "}
               <td>{item.profiles.map((perfil) => perfil.name).join(", ")}</td>
             </tr>
           ))}

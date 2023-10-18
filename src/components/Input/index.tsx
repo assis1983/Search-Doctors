@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { InputCheckbox } from "../Input/style";
 import Eye from "../../assets/icons/eye";
 
@@ -17,8 +17,13 @@ export function Input({
   inputSetState,
   password,
 }: Props) {
+  const [showPassword, setShowPassword] = useState(false);
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     inputSetState(event.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -30,10 +35,10 @@ export function Input({
           value={inputState}
           placeholder={placeholder}
           onChange={handleInput}
-          type={password ? "password" : "text"}
+          type={showPassword ? "text" : password ? "password" : "text"}
         />
         {password && (
-          <div className="eyeIconDiv">
+          <div className="eyeIconDiv" onClick={togglePasswordVisibility}>
             <Eye />
           </div>
         )}

@@ -4,22 +4,17 @@ import { Variant } from "../../types/types";
 
 type Props = {
   variant: Variant;
-  // content?: number;
+  children: React.ReactNode;
 };
 
-const CardTitle = ({ variant }: Props) => {
+const CardTitle = ({ variant, children }: Props) => {
   return (
     <>
       <CustomCardTitle customCardColor={CardTitleVariants[variant].color}>
-        <div className="customIcone">
-          {CardTitleVariants[variant].icon}{" "}
-          {/* {content !== undefined && <p>{content}</p>} */}
-        </div>
-        <div className="dateCards">
-          {CardTitleVariants[variant].text}{" "}
-          {/* {content !== undefined && <p>{content}</p>} */}
-        </div>
+        <div className="customIcone">{CardTitleVariants[variant].icon}</div>
+        <div className="dateCards">{CardTitleVariants[variant].text}</div>
       </CustomCardTitle>
+      {children}
     </>
   );
 };

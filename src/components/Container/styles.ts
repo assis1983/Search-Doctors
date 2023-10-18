@@ -19,6 +19,7 @@ export const Container = styled.div`
       height: 200px;
     }
   }
+  
 `;
 
 export const MainContainer = styled.div`

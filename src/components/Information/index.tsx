@@ -3,8 +3,32 @@ import { StyleHeaderCards } from "../HeaderCards/style";
 import * as S from "./style";
 import NewDate from "../InputCalendar";
 import { MainHeader } from "../HeaderCards";
+import CardTitle from "../Card";
+import { getCards } from "../../services/Dashboard/getCardsDashboard";
+import { useState, useEffect } from "react";
 
-export default function Information() {
+type UserType = {
+  doctor: { total: string; available: string; unavailable: string };
+  contractor: { total: string; available: string; unavailable: string };
+};
+
+const Information = () => {
+  const [cardsData, setCardsData] = useState<UserType>();
+
+  // Fetch and store the data from getCards
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getCards(); // Assuming getCards returns the data you need
+        setCardsData(data);
+      } catch (error) {
+        // Handle error here
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <S.StyledRetangle>
@@ -19,9 +43,42 @@ export default function Information() {
       </S.StyledRetangle>
       <NewDate />
       <StyleHeaderCards>
-        <MainHeader title="Médicos" children={undefined}></MainHeader>
-        <MainHeader title={"Contratantes"} children={undefined} />
+        <MainHeader title="Médicos">
+          {cardsData && (
+            <CardTitle variant={"total"}>
+              <p>{cardsData.doctor.total}</p>
+            </CardTitle>
+          )}
+          {cardsData && (
+            <CardTitle variant={"available"}>
+              <p>{cardsData.doctor.available}</p>
+            </CardTitle>
+          )}
+          {cardsData && (
+            <CardTitle variant={"unavailable"}>
+              <p>{cardsData.doctor.unavailable}</p>
+            </CardTitle>
+          )}
+        </MainHeader>
+        <MainHeader title="Contratantes">
+          {cardsData && (
+            <CardTitle variant={"totalcontracts"}>
+              <p>{cardsData.contractor.total}</p>
+            </CardTitle>
+          )}
+          {cardsData && (
+            <CardTitle variant={"active"}>
+              <p>{cardsData.contractor.available}</p>
+            </CardTitle>
+          )}
+          {cardsData && (
+            <CardTitle variant={"inactive"}>
+              <p>{cardsData.contractor.unavailable}</p>
+            </CardTitle>
+          )}
+        </MainHeader>
       </StyleHeaderCards>
     </>
   );
-}
+};
+export default Information;

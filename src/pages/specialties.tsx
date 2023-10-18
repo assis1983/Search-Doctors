@@ -10,7 +10,7 @@ import { FilterButton } from "../components/Filter";
 import { ReactNode, useEffect, useState } from "react";
 import { StyleLinkNewPlan } from "../components/Filter/styles";
 import { Table } from "../components/Table";
-import ToggleButton from "../components/ToggleButton";
+// import ToggleButton from "../components/ToggleButton";
 import { getSpecialties } from "../services/Especialities/getSpecialties";
 import EyeTable from "../assets/icons/eyetable";
 import Pencil from "../assets/icons/pencil";
@@ -90,11 +90,11 @@ const Specialties = () => {
               <td>{index.name}</td>
               <td className="toogle">
                 {index.enabled}
-                <ToggleButton
+                {/* <ToggleButton
                   onToggle={function (): void {
                     throw new Error("Function not implemented.");
                   }}
-                />
+                /> */}
                 {"Ativo"}
               </td>
               <td>

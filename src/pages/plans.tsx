@@ -10,18 +10,17 @@ import { FilterButton } from "../components/Filter";
 import { StyleDivFilter } from "../components/Filter/styles";
 import { ButtonAdd } from "../components/ButtonAdd";
 import { Table } from "../components/Table";
-import ToggleButton from "../components/ToggleButton";
 import { StyleLinkNewPlan } from "../components/Filter/styles";
 import { getPlans } from "../services/Plans/getPlans";
 import EyeTable from "../assets/icons/eyetable";
 import Pencil from "../assets/icons/pencil";
 import Delete from "../assets/icons/delete";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type PlansType = {
   id: number;
   planTitle: string;
-  enabled: ReactNode;
+  enabled: boolean;
   actions: ReactNode;
   values: number;
   period: string;
@@ -41,11 +40,11 @@ const Plans = () => {
   const [stateFilter, setStateFilter] = useState<
     "TODOS" | "EM_ALTA" | "EM_BAIXA"
   >("TODOS");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const goToPage = (url: string) => {
-    navigate(url);
-  };
+  // const goToPage = (url: string) => {
+  //   navigate(url);
+  // };
   const fetchPlans = async () => {
     const result = await getPlans();
     if (result.message) {
@@ -103,27 +102,20 @@ const Plans = () => {
         </StyleDivFilter>
         <Table headersArray={TableTitle}>
           {plans.map((item) => (
-            <tr
-              className="tableItems"
-              key={item.id}
-              onClick={() => goToPage(`/typeplan`)}
-              style={{ cursor: "pointer" }}
-            >
+            <tr className="tableItems" key={item.id}>
               <td>{item.period}</td>
               <td>{item.values}</td>
               <td>{item.values}</td>
               <td className="toogle">
-                {item.enabled}
-                <ToggleButton
-                  onToggle={function (): void {
-                    throw new Error("Function not implemented.");
-                  }}
-                />
+                <input type="checkbox" checked={item.enabled} disabled />
                 Ativo
               </td>
               <td>
                 {item.actions}
-                <EyeTable />
+                <Link to={"/typeplan"}>
+                  {" "}
+                  <EyeTable />
+                </Link>
                 <Pencil />
                 <Delete />
               </td>

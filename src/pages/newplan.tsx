@@ -23,11 +23,12 @@ const NewPlan = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
   return (
     <>
       <Menu />
       <Header />
-      <StyleLinkUser to={"/dashboard"}>
+      <StyleLinkUser to={"/plans"}>
         <CardTitle2
           icon={<ChevronLeft />}
           text={"Novo plano - contratante"}

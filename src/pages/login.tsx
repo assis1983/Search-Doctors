@@ -9,7 +9,6 @@ import { Button } from "../components/Button";
 import { Link } from "react-router-dom";
 import { postLogin } from "../services/auth/auth";
 
-
 const Login = () => {
   const [stateLogin, setStateLogin] = useState("");
   const [statePassword, setStatePassword] = useState("");
@@ -36,12 +35,14 @@ const Login = () => {
             placeholder={"Insira seu Email"}
             inputState={stateLogin}
             inputSetState={setStateLogin}
+            password={false}
           />
           <Input
             label={"Senha"}
             placeholder={"Insira sua Senha"}
             inputState={statePassword}
             inputSetState={setStatePassword}
+            password={true}
           />
           <div id="checkbox-remember">
             <div className="checkboxDiv">

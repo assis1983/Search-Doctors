@@ -28,7 +28,7 @@ const NewNotification = () => {
     <>
       <Menu />
       <Header />
-      <StyleLinkUser to={"/dashboard"}>
+      <StyleLinkUser to={"/notifications"}>
         <CardTitle2
           icon={<ChevronLeft />}
           text={"Nova Notificação"}

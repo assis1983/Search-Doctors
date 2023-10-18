@@ -24,6 +24,7 @@ const Faq = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
   return (
     <>
       <Menu />

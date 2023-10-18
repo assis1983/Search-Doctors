@@ -14,9 +14,25 @@ import ToggleButton from "../components/ToggleButton";
 import { Button } from "../components/Button";
 import { CloseButton, CustomModal } from "../components/StyleModal/style";
 import { useState } from "react";
+import { postSpecialties } from "../services/Especialities/postSpecialties";
 
 const NewEspciality = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [specialtyName, setSpecialtyName] = useState("");
+
+  const handleSaveClick = async () => {
+    try {
+      const response = await postSpecialties();
+      console.log(response);
+
+      if (response) {
+        // A especialidade foi salva com sucesso, você pode exibir o modal ou fazer outras ações aqui
+        openModal();
+      }
+    } catch (error) {
+      // Trate os erros de requisição aqui, se necessário
+    }
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -29,7 +45,7 @@ const NewEspciality = () => {
     <>
       <Menu />
       <Header />
-      <StyleLinkUser to={"/dashboard"}>
+      <StyleLinkUser to={"/specialties"}>
         <CardTitle2
           icon={<ChevronLeft />}
           text={"Nova Especialidade"}
@@ -42,10 +58,8 @@ const NewEspciality = () => {
           <Input
             label={"Nome"}
             placeholder={""}
-            inputState={""}
-            inputSetState={function (): void {
-              throw new Error("Function not implemented.");
-            }}
+            inputState={specialtyName}
+            inputSetState={setSpecialtyName}
           />
           <div className="styled-toogle">
             <Title fontSize={14} color={colors.deepGrey}>
@@ -59,7 +73,7 @@ const NewEspciality = () => {
             </Title>
           </div>
         </StyleInputUser>
-        <Button text={"Salvar"} variant={"login"} onClick={openModal} />
+        <Button text={"Salvar"} variant={"login"} onClick={handleSaveClick} />
         <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
           <div>
             <Title fontSize={32}>Especialidade Salva com Sucesso</Title>

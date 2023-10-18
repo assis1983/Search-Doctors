@@ -1,23 +1,21 @@
 import axios from "axios";
 import { AxiosResponse } from "axios";
 import { api } from "../Api/apiservice";
-import Pagination from "../../types/types";
 
-export type CardsApi = Pagination & {
+type UsersApi = {
   total: number;
-  available: number;
-  unavailable: number;
+  totalDoctors: number;
+  totalContractor: number;
 };
 
-export const getCards = async () => {
+export const getCount = async () => {
   try {
     const token = localStorage.getItem("token");
-    const result: AxiosResponse<CardsApi> = await api.get("/users/dashboard", {
+    const result: AxiosResponse<UsersApi> = await api.get("/users/count", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(result);
     return result.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

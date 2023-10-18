@@ -35,16 +35,16 @@ export const CardTitleVariants: CardTitleInfo = {
   totalcontracts: {
     text: "Total",
     icon: <IconTotalYellow />,
-    color: colors.lightGrey,
+    color: colors.colorcard,
   },
   active: {
     text: "Ativos",
     icon: <IconActive />,
-    color: colors.success,
+    color: colors.colorcard,
   },
   inactive: {
     text: "Inativos",
     icon: <IconUnavoidable />,
-    color: colors.warning,
+    color: colors.colorcard,
   },
 };

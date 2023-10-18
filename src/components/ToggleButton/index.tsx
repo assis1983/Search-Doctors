@@ -11,12 +11,12 @@ const ToggleButton = ({ onToggle }: Props) => {
   const handleClick = () => {
     const newValue = !isActive;
     setIsActive(newValue);
-    onToggle(newValue); 
+    onToggle(newValue);
   };
   return (
     <div>
       <ToggleButtonContainer active={isActive} onClick={handleClick}>
-        <Ball active={isActive}/>
+        <Ball active={isActive} />
       </ToggleButtonContainer>
     </div>
   );
