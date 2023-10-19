@@ -11,7 +11,7 @@ export const MainHeaderStyle = styled.div`
   border-radius: 24px;
   margin-left: 5rem;
   .upperDiv {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 
     p {
       font-family: Poppins;
@@ -23,42 +23,22 @@ export const MainHeaderStyle = styled.div`
 
   .cards {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-left: 150px;
   }
-
-//   .predictionsHeader {
-//     padding: 1rem;
-//   }
-
-//   .predictionsHeaderTitle {
-//     color: ${colors.white};
-//     font-weight: 600;
-//     font-family: Sora;
-//     font-size: 32px;
-//     align-items: baseline;
-//   }
-
-//   .predictionsHeaderSubtitle {
-//     color: ${colors.white};
-//     font-weight: 400;
-//     font-family: Sora;
-//     font-size: 16px;
-//     display: flex;
-//     align-items: baseline;
-//     padding: 1rem;
-//     gap: 20px;
-//   }
-
-//   .subtitles {
-//     display: flex;
-//     gap: 10px;
-//   }
-// `;
+  
+ `;
 
 export const StyleHeaderCards = styled.div`
+  position; absolute;
   display: flex;
   flex-direction: column;
   margin-left: auto;
   gap: 1.5rem;
   padding: 0.5rem;
+  h1 {
+    position: relative;
+    left: -150px;
+      
+  }
 `

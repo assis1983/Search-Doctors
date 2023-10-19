@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { HamburgerButton } from "./style";
 
-export function Hamburguer() {
+const Hamburguer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -27,4 +27,6 @@ export function Hamburguer() {
       )}
     </div>
   );
-}
+};
+
+export default Hamburguer;

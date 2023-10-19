@@ -1,65 +1,64 @@
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
-import { StyledTitle, Title } from "../components/Title/style";
+import { Title } from "../components/Title/style";
 import { Container } from "../components/Container/styles";
-import { useEffect, useState } from "react";
+import { StyledTitle } from "../components/Title/style";
 import CardButtonPlans from "../components/ButtonFilterPlans";
-import { StyleCardButtonDuplo } from "../components/ButtonFilterPlans/style";
+import { ReactNode, useEffect, useState } from "react";
 import { StyleDivFilter, StyleLinkNewPlan } from "../components/Filter/styles";
 import { StyleInputs } from "../components/Search/styles";
 import { SearchInput } from "../components/Search";
 import { FilterButton } from "../components/Filter";
 import { ButtonAdd } from "../components/ButtonAdd";
 import { Table } from "../components/Table";
+import { getQuestions } from "../services/Questions/getQuestions";
+import { Link } from "react-router-dom";
 import EyeTable from "../assets/icons/eyetable";
 import Pencil from "../assets/icons/pencil";
 import Delete from "../assets/icons/delete";
-import { getNotification } from "../services/Notifications/getNotifications";
 
-type NotificationsType = {
+type QuestionsTYpe = {
   id: number;
   title: string;
-  updatedAt: number;
+  action: ReactNode;
 }[];
 
-const Notifications = () => {
-  const [notifications, setNotifications] = useState<NotificationsType>(
-    [] as NotificationsType
-  );
-  const productTableTitle = ["Título", "Data de Envio", "Ações"];
+const Questions = () => {
   const [selectedButton, setSelectedButton] = useState<string>("Médicos");
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [stateFilter, setStateFilter] = useState<
     "TODOS" | "EM_ALTA" | "EM_BAIXA"
   >("TODOS");
+  const TableTitle = ["Título", "Ações"];
+  const [questions, setQuestions] = useState<QuestionsTYpe>(
+    [] as QuestionsTYpe
+  );
 
-  const fetchNotifications = async () => {
-    const result = await getNotification();
+  const fetchQuestions = async () => {
+    const result = await getQuestions();
     if (result.message) {
       alert(result.message);
     } else {
-      setNotifications(result);
+      setQuestions(result);
     }
   };
 
   useEffect(() => {
-    fetchNotifications();
+    fetchQuestions();
   }, []);
-
+  console.log(questions);
   return (
     <>
       <Menu />
       <Header />
       <StyledTitle>
-        <Title fontSize={32}>Notificações</Title>
+        <Title fontSize={32}>FAQ(Perguntas Frequentes)</Title>
       </StyledTitle>
-      <StyleCardButtonDuplo>
+      <Container>
         <CardButtonPlans
           selectedButton={selectedButton}
           setSelectedButton={setSelectedButton}
         />
-      </StyleCardButtonDuplo>
-      <Container>
         <StyleDivFilter>
           <StyleInputs>
             <SearchInput
@@ -77,24 +76,29 @@ const Notifications = () => {
             button={setFilterOn}
             stateFilter={stateFilter}
             setStateFilter={setStateFilter}
-            getFilter={fetchNotifications}
+            getFilter={function (): void {
+              throw new Error("Function not implemented.");
+            }}
           />
-          <StyleLinkNewPlan to={"/newnotification"}>
+          <StyleLinkNewPlan to={"/faq"}>
             <ButtonAdd
-              text={"Nova Notificação"}
+              text={"Novo FAQ"}
               onClick={function (): void {
                 throw new Error("Function not implemented.");
               }}
             />
           </StyleLinkNewPlan>
         </StyleDivFilter>
-        <Table headersArray={productTableTitle}>
-          {notifications.map((item) => (
-            <tr key={item.id} style={{ cursor: "pointer" }}>
+        <Table headersArray={TableTitle}>
+          {questions.map((item) => (
+            <tr className="tableItems" key={item.id}>
               <td>{item.title}</td>
-              <td>{item.updatedAt}</td>
               <td>
-                <EyeTable />
+                {item.action}
+                <Link to={"/typeplan"}>
+                  {" "}
+                  <EyeTable />
+                </Link>
                 <Pencil />
                 <Delete />
               </td>
@@ -106,4 +110,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default Questions;

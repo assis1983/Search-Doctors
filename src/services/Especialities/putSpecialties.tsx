@@ -1,18 +1,14 @@
 import { AxiosResponse } from "axios";
 import { api } from "../Api/apiservice";
 
-type SpecialtiesApi = {
-  content: {
-    name: string;
-    enabled: boolean;
-  }[];
-};
-
-export const postSpecialties = async () => {
+export const putSpecialties = async (id: number) => {
   try {
     const token = localStorage.getItem("token");
-    const result: AxiosResponse<SpecialtiesApi> = await api.post(
-      "/specialties",
+    const result: AxiosResponse = await api.put(
+      `/specialties/${id}`,
+      {
+        id,
+      },
       {
         headers: {
           Authorization: `Bearer ${token}`,

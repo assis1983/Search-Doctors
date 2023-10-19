@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const StyledHamburguer = styled.div`
+  margin-left: auto;
+`
+
 export const HamburgerButton = styled.button`
   display: flex;
   flex-direction: column;

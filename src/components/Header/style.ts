@@ -18,6 +18,7 @@ export const HeaderStyle = styled.div`
     color: ${colors.grey};
     cursor: pointer;
   }
+
 `
 export const UserHeadStyle = styled.div`
   display: flex;

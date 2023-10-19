@@ -19,5 +19,6 @@ export const CustomCardTitle = styled.div<{ customCardColor: string }>`
     font-size: 1rem;
     font-weight: 400;
     top: -1rem;
+    right: 1rem;
   }
 `;

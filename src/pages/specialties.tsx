@@ -10,7 +10,6 @@ import { FilterButton } from "../components/Filter";
 import { ReactNode, useEffect, useState } from "react";
 import { StyleLinkNewPlan } from "../components/Filter/styles";
 import { Table } from "../components/Table";
-// import ToggleButton from "../components/ToggleButton";
 import { getSpecialties } from "../services/Especialities/getSpecialties";
 import EyeTable from "../assets/icons/eyetable";
 import Pencil from "../assets/icons/pencil";
@@ -27,9 +26,8 @@ const Specialties = () => {
   const [specialties, setSpecialties] = useState<SpecialtiesType>(
     [] as SpecialtiesType
   );
-
   const tableTitle = ["Nome Especialidade", "Situação", "Ações"];
-
+  const [searchParam, setSearchParam] = useState<string>("");
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [stateFilter, setStateFilter] = useState<
     "TODOS" | "EM_ALTA" | "EM_BAIXA"
@@ -44,6 +42,12 @@ const Specialties = () => {
     }
   };
 
+  const handleSearchClick = () => {
+    const filteredUsers = specialties.filter((item) =>
+      item.name.toLowerCase().includes(searchParam.toLowerCase())
+    );
+    setSpecialties(filteredUsers);
+  };
   useEffect(() => {
     fetchSpecialties();
   }, []);
@@ -59,13 +63,9 @@ const Specialties = () => {
         <StyleDivFilter>
           <StyleInputs>
             <SearchInput
-              searchParam={""}
-              setSearchParam={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-              onClick={function (): void {
-                throw new Error("Function not implemented.");
-              }}
+              searchParam={searchParam}
+              setSearchParam={setSearchParam}
+              onClick={handleSearchClick}
             />
           </StyleInputs>
           <FilterButton
@@ -90,11 +90,6 @@ const Specialties = () => {
               <td>{index.name}</td>
               <td className="toogle">
                 {index.enabled}
-                {/* <ToggleButton
-                  onToggle={function (): void {
-                    throw new Error("Function not implemented.");
-                  }}
-                /> */}
                 {"Ativo"}
               </td>
               <td>

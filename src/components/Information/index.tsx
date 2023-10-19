@@ -46,34 +46,34 @@ const Information = () => {
         <MainHeader title="Médicos">
           {cardsData && (
             <CardTitle variant={"total"}>
-              <p>{cardsData.doctor.total}</p>
+              <h1>{cardsData.doctor.total}</h1>
             </CardTitle>
           )}
           {cardsData && (
             <CardTitle variant={"available"}>
-              <p>{cardsData.doctor.available}</p>
+              <h1>{cardsData.doctor.available}</h1>
             </CardTitle>
           )}
           {cardsData && (
             <CardTitle variant={"unavailable"}>
-              <p>{cardsData.doctor.unavailable}</p>
+              <h1>{cardsData.doctor.unavailable}</h1>
             </CardTitle>
           )}
         </MainHeader>
         <MainHeader title="Contratantes">
           {cardsData && (
             <CardTitle variant={"totalcontracts"}>
-              <p>{cardsData.contractor.total}</p>
+              <h1>{cardsData.contractor.total}</h1>
             </CardTitle>
           )}
           {cardsData && (
             <CardTitle variant={"active"}>
-              <p>{cardsData.contractor.available}</p>
+              <h1>{cardsData.contractor.available}</h1>
             </CardTitle>
           )}
           {cardsData && (
             <CardTitle variant={"inactive"}>
-              <p>{cardsData.contractor.unavailable}</p>
+              <h1>{cardsData.contractor.unavailable}</h1>
             </CardTitle>
           )}
         </MainHeader>

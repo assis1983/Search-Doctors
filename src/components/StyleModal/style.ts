@@ -8,7 +8,7 @@ export const CustomModal = styled(Modal)`
   align-items: center;
   justify-content: center;
   width: 618px;
-  height: 359px;
+  height: 500px;
   background-color: ${colors.light};
   border-radius: 24px;
   position: relative;

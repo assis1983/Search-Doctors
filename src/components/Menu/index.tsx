@@ -1,10 +1,10 @@
-import { MenuItemStyle } from './styles'
+import { MenuItemStyle } from "./styles";
 
 type Props = {
-  icon: JSX.Element
-  text: string
-  url: string
-}
+  icon: JSX.Element;
+  text: string;
+  url: string;
+};
 
 export function MenuItem({ icon, text, url }: Props) {
   return (
@@ -12,5 +12,5 @@ export function MenuItem({ icon, text, url }: Props) {
       <span>{icon}</span>
       <span>{text}</span>
     </MenuItemStyle>
-  )
+  );
 }

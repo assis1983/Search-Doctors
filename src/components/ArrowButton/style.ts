@@ -31,5 +31,8 @@ export const ButtonWrapper = styled.button<{ isClicked: boolean }>`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 150%;
     }
+    
+
  `

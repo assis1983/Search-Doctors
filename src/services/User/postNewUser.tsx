@@ -1,18 +1,14 @@
 import { AxiosResponse } from "axios";
 import { api } from "../Api/apiservice";
 
-type SpecialtiesApi = {
-  content: {
-    name: string;
-    enabled: boolean;
-  }[];
-};
-
-export const postSpecialties = async () => {
+export const postNewUser = async (userData: string) => {
   try {
     const token = localStorage.getItem("token");
-    const result: AxiosResponse<SpecialtiesApi> = await api.post(
-      "/specialties",
+    const result: AxiosResponse = await api.post(
+      "/public/register/register-user-account",
+      {
+        userData,
+      },
       {
         headers: {
           Authorization: `Bearer ${token}`,

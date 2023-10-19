@@ -41,6 +41,8 @@ const NewEspciality = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  console.log(specialtyName);
   return (
     <>
       <Menu />

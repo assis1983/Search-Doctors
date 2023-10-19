@@ -37,7 +37,7 @@ const Itens = [
   {
     icon: <Help />,
     text: "FAQ",
-    url: "/faq",
+    url: "/questions",
   },
 ];
 

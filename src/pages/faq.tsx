@@ -29,7 +29,7 @@ const Faq = () => {
     <>
       <Menu />
       <Header />
-      <StyleLinkUser to={"/dashboard"}>
+      <StyleLinkUser to={"/questions"}>
         <CardTitle2
           icon={<ChevronLeft />}
           text={"Novo FAQ"}
