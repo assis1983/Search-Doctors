@@ -26,7 +26,13 @@ export const CustomModal = styled(Modal)`
     background-color: blue;
   }
   }
-  
+  .cancel {
+    width: 25%;
+    height: 10%;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
 `;
 
 export const CloseButton = styled.button`

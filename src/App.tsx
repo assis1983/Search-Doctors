@@ -14,6 +14,7 @@ import NewEspciality from "./pages/newespeciality";
 import NewNotification from "./pages/newnotification";
 import EditProfile from "./pages/editprofile";
 import Questions from "./pages/commonquestions";
+import EditPlans from "./pages/editplans";
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
           <Route path="/clientesdetails" element={<ClientesDetails />} />
           <Route path="/plans" element={<Plans />} />
           <Route path="/newplan" element={<NewPlan />} />
-          <Route path="/typeplan" element={<TypePlan />} />
+          <Route path="/typeplan/:id" element={<TypePlan />} />
+          <Route path="/editplans/:id" element={<EditPlans />} />
           <Route path="/questions" element={<Questions />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/specialties" element={<Specialties />} />

@@ -36,6 +36,10 @@ const Login = () => {
             inputState={stateLogin}
             inputSetState={setStateLogin}
             password={false}
+            onChange={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+            value={""}
           />
           <Input
             label={"Senha"}
@@ -43,6 +47,10 @@ const Login = () => {
             inputState={statePassword}
             inputSetState={setStatePassword}
             password={true}
+            onChange={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+            value={""}
           />
           <div id="checkbox-remember">
             <div className="checkboxDiv">

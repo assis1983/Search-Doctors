@@ -19,7 +19,11 @@ export const Container = styled.div`
       height: 200px;
     }
   }
-  
+  .buttonNavigate {
+    border: none;
+    background-color: transparent;  
+    cursor: pointer;
+  }
 `;
 
 export const MainContainer = styled.div`

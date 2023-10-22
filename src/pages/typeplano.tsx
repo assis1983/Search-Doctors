@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
 import { Container } from "../components/Container/styles";
@@ -17,8 +18,31 @@ import Pencil from "../assets/icons/pencil";
 import Delete from "../assets/icons/delete";
 import { CustomModal, CloseButton } from "../components/StyleModal/style";
 import { Button } from "../components/Button";
+import { getPlans } from "../services/Plans/getPlans";
+
+type PlansType = {
+  id: number;
+  planTitle: string;
+  enabled: boolean;
+  actions: ReactNode;
+  values: number;
+  period: string;
+}[];
 
 const TypePlan = () => {
+  const { id } = useParams();
+  const [plans, setPlans] = useState<PlansType>([] as PlansType);
+  const [selectedPlan, setSelectedPlan] = useState<PlansType>([]);
+
+  const fetchPlans = async () => {
+    const result = await getPlans();
+    if (result.message) {
+      alert(result.message);
+    } else {
+      setPlans(result);
+    }
+  };
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -28,12 +52,24 @@ const TypePlan = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    fetchPlans();
+  }, [id]);
+
+  useEffect(() => {
+    const selectedPlan = plans.find((plan) => plan.id === parseInt(id));
+    if (selectedPlan) {
+      setSelectedPlan(selectedPlan);
+    }
+  }, [id, plans]);
+
   return (
     <>
       <Menu />
       <Header />
       <StyleOptionsPlan>
-        <StyleLinkUser to={"/plans"}>
+        <StyleLinkUser to="/plans">
           <CardTitle2
             icon={<ChevronLeft />}
             text={"Planos"}
@@ -73,8 +109,8 @@ const TypePlan = () => {
         <StyleInputUser>
           <Input
             label={"Título do plano"}
-            placeholder={""}
-            inputState={""}
+            placeholder=""
+            inputState={selectedPlan.planTitle}
             inputSetState={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -83,19 +119,19 @@ const TypePlan = () => {
             <Title fontSize={14} color={colors.deepGrey}>
               Situação
             </Title>
-            <ToggleButton onToggle={() => {}} />
+            <ToggleButton onToggle={() => {}} enabled={selectedPlan.enabled} />{" "}
           </div>
           <div className="styled-title-active">
             <Title fontSize={16} color={colors.deepGrey}>
-              Ativo
+              {selectedPlan.enabled ? "Ativo" : "Inativo"}{" "}
             </Title>
           </div>
         </StyleInputUser>
         <div className="input-value">
           <Input
             label={"Valor"}
-            placeholder={""}
-            inputState={""}
+            placeholder=""
+            inputState={selectedPlan ? selectedPlan.values.toString() : ""}
             inputSetState={function (): void {
               throw new Error("Function not implemented.");
             }}

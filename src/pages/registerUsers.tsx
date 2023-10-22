@@ -17,7 +17,6 @@ type UserType = {
   email: string;
   phone: string;
   specialties: { name: string }[];
-  address: { city: string };
   profiles: { name: string }[];
 }[];
 
@@ -108,8 +107,8 @@ const RegisterUser = () => {
               <td>
                 {item.specialties.map((specialty) => specialty.name).join(", ")}
               </td>{" "}
-              <td>teste</td>
-              <td>teste</td>{" "}
+              <td>Adamantina</td>
+              <td>SP</td>{" "}
               <td>{item.profiles.map((perfil) => perfil.name).join(", ")}</td>
             </tr>
           ))}

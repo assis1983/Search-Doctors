@@ -1,7 +1,8 @@
 import { isAxiosError } from "axios";
 import { api } from "../Api/apiservice";
 
-export const postPlan = async (
+export const putPlan = async (
+  id: number,
   planTitle: string,
   enabled: boolean,
   period: string,
@@ -10,8 +11,8 @@ export const postPlan = async (
 ) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await api.post(
-      "/plans",
+    const response = await api.put(
+      `/plans/${id}`,
       {
         planTitle,
         enabled,
@@ -24,7 +25,6 @@ export const postPlan = async (
       }
     );
     return response.data;
-    console.log(response);
   } catch (error) {
     if (isAxiosError(error)) {
       return null;

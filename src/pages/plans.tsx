@@ -12,10 +12,15 @@ import { ButtonAdd } from "../components/ButtonAdd";
 import { Table } from "../components/Table";
 import { StyleLinkNewPlan } from "../components/Filter/styles";
 import { getPlans } from "../services/Plans/getPlans";
+import { deletePlan } from "../services/Plans/deletePlans";
 import EyeTable from "../assets/icons/eyetable";
 import Pencil from "../assets/icons/pencil";
 import Delete from "../assets/icons/delete";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { CustomModal } from "../components/StyleModal/style";
+import { Button } from "../components/Button";
+import ToggleButton from "../components/ToggleButton";
+import { colors } from "../theme";
 
 type PlansType = {
   id: number;
@@ -34,23 +39,45 @@ const Plans = () => {
     "Situação",
     "Ações",
   ];
-  const [plans, setPlans] = useState<PlansType>([] as PlansType);
+  const [plans, setPlans] = useState<PlansType>([]);
   const [selectedButton, setSelectedButton] = useState<string>("Médicos");
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [stateFilter, setStateFilter] = useState<
     "TODOS" | "EM_ALTA" | "EM_BAIXA"
   >("TODOS");
-  // const navigate = useNavigate();
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [planToDelete, setPlanToDelete] = useState(null);
+  const [searchParam, setSearchParam] = useState<string>("");
+  const navigate = useNavigate();
 
-  // const goToPage = (url: string) => {
-  //   navigate(url);
-  // };
   const fetchPlans = async () => {
     const result = await getPlans();
     if (result.message) {
       alert(result.message);
     } else {
       setPlans(result);
+    }
+  };
+
+  const handleSearchClick = () => {
+    const filteredUsers = plans.filter((item) =>
+      item.period.toLowerCase().includes(searchParam.toLowerCase())
+    );
+    setPlans(filteredUsers);
+  };
+
+  const handleDeletePlan = (id) => {
+    setPlanToDelete(id);
+    setIsConfirmationModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    setIsConfirmationModalOpen(false);
+
+    if (planToDelete !== null) {
+      deletePlan(planToDelete);
+      setPlanToDelete(null);
+      window.location.reload();
     }
   };
 
@@ -73,13 +100,9 @@ const Plans = () => {
         <StyleDivFilter>
           <StyleInputs>
             <SearchInput
-              searchParam={""}
-              setSearchParam={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-              onClick={function (): void {
-                throw new Error("Function not implemented.");
-              }}
+              searchParam={searchParam}
+              setSearchParam={setSearchParam}
+              onClick={handleSearchClick}
             />
           </StyleInputs>
           <FilterButton
@@ -107,21 +130,61 @@ const Plans = () => {
               <td>{item.values}</td>
               <td>{item.values}</td>
               <td className="toogle">
-                <input type="checkbox" checked={item.enabled} disabled />
-                Ativo
+                <ToggleButton onToggle={() => {}} enabled={item.enabled} />
+                {""}
+                <div className="styled-title-active">
+                  <Title fontSize={16} color={colors.deepGrey}>
+                    {item.enabled ? "Ativo" : "Ativo"}{" "}
+                  </Title>
+                </div>
               </td>
               <td>
                 {item.actions}
-                <Link to={"/typeplan"}>
-                  {" "}
+                <button
+                  className="buttonNavigate"
+                  onClick={() => navigate(`/typeplan/${item.id}`)}
+                >
                   <EyeTable />
-                </Link>
-                <Pencil />
-                <Delete />
+                </button>
+                <button
+                  className="buttonNavigate"
+                  onClick={() => navigate(`/editplans/${item.id}`)}
+                >
+                  <Pencil />
+                </button>
+                <button
+                  className="buttonNavigate"
+                  onClick={() => handleDeletePlan(item.id)}
+                >
+                  <Delete />
+                </button>
               </td>
             </tr>
           ))}
         </Table>
+        <CustomModal
+          isOpen={isConfirmationModalOpen}
+          onRequestClose={() => setIsConfirmationModalOpen(false)}
+        >
+          <Title fontSize={25}>
+            Tem certeza que deseja{" "}
+            <span style={{ color: "red", textDecoration: "underline" }}>
+              excluir
+            </span>
+            esse item?
+          </Title>
+          <Button
+            text={"Sim, Exluir Item"}
+            variant={"login"}
+            onClick={handleConfirmDelete}
+          ></Button>
+          <button
+            onClick={() => setIsConfirmationModalOpen(false)}
+            className="cancel"
+          >
+            <span style={{ color: "red" }}>Cancelar</span>
+          </button>
+        </CustomModal>
       </Container>
     </>
   );

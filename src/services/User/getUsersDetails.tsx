@@ -19,7 +19,6 @@ export const getUser = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     return result.data.content;
   } catch (error) {
     if (axios.isAxiosError(error)) {

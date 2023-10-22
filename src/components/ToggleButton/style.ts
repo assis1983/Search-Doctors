@@ -10,7 +10,6 @@ export const ToggleButtonContainer = styled.button<{ active: boolean }>`
   border: none;
   border-radius: 16px;
   position: relative;
-  cursor: pointer;
   outline: none;
   overflow: hidden;
 `;

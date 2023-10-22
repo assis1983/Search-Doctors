@@ -3,9 +3,10 @@ import { ToggleButtonContainer, Ball } from "./style";
 
 type Props = {
   onToggle: (value: boolean) => void;
+  enabled: boolean;
 };
 
-const ToggleButton = ({ onToggle }: Props) => {
+const ToggleButton = ({ onToggle, enabled }: Props) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
@@ -15,8 +16,8 @@ const ToggleButton = ({ onToggle }: Props) => {
   };
   return (
     <div>
-      <ToggleButtonContainer active={isActive} onClick={handleClick}>
-        <Ball active={isActive} />
+      <ToggleButtonContainer active={enabled} onClick={handleClick}>
+        <Ball active={enabled} />
       </ToggleButtonContainer>
     </div>
   );
