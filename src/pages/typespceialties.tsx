@@ -1,8 +1,5 @@
-import { ReactNode, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
-import { Container } from "../components/Container/styles";
 import {
   StyleInputUser,
   StyleLinkUser,
@@ -11,38 +8,30 @@ import { StyleOptionsPlan } from "../components/Styleoptionsplan/style";
 import { CardTitle2 } from "../components/Cardone";
 import ChevronLeft from "../assets/icons/chevron left";
 import { colors } from "../theme";
+import Pencil from "../assets/icons/pencil";
+import Delete from "../assets/icons/delete";
+import { Container } from "../components/Container/styles";
 import { Title } from "../components/Title/style";
 import { Input } from "../components/Input";
 import ToggleButton from "../components/ToggleButton";
-import Pencil from "../assets/icons/pencil";
-import Delete from "../assets/icons/delete";
-import { CustomModal, CloseButton } from "../components/StyleModal/style";
+import { getSpecialties } from "../services/Especialities/getSpecialties";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { CloseButton, CustomModal } from "../components/StyleModal/style";
 import { Button } from "../components/Button";
-import { getPlans } from "../services/Plans/getPlans";
 
 type PlansType = {
   id: number;
-  planTitle: string;
+  name: string;
   enabled: boolean;
-  actions: ReactNode;
   values: number;
   period: string;
 }[];
 
-const TypePlan = () => {
+const TypeSpecialties = () => {
   const { id } = useParams();
   const [plans, setPlans] = useState<PlansType>([] as PlansType);
   const [selectedPlan, setSelectedPlan] = useState<PlansType>([]);
-
-  const fetchPlans = async () => {
-    const result = await getPlans();
-    if (result.message) {
-      alert(result.message);
-    } else {
-      setPlans(result);
-    }
-  };
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -51,6 +40,15 @@ const TypePlan = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const fetchPlans = async () => {
+    const result = await getSpecialties();
+    if (result.message) {
+      alert(result.message);
+    } else {
+      setPlans(result);
+    }
   };
 
   useEffect(() => {
@@ -69,10 +67,10 @@ const TypePlan = () => {
       <Menu />
       <Header />
       <StyleOptionsPlan>
-        <StyleLinkUser to="/plans">
+        <StyleLinkUser to="/specialties">
           <CardTitle2
             icon={<ChevronLeft />}
-            text={"Planos"}
+            text={"Especialidades"}
             backgroundColor={colors.light}
           />
         </StyleLinkUser>
@@ -105,12 +103,12 @@ const TypePlan = () => {
         </div>
       </StyleOptionsPlan>
       <Container>
-        <Title fontSize={20}>Dados do Plano</Title>
+        <Title fontSize={20}>Dados da Especialidade</Title>
         <StyleInputUser>
           <Input
             label={"Título do plano"}
-            placeholder=""
-            inputState={selectedPlan.planTitle}
+            placeholder={""}
+            inputState={selectedPlan.name}
             inputSetState={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -129,9 +127,9 @@ const TypePlan = () => {
         </StyleInputUser>
         <div className="input-value">
           <Input
-            label={"Valor"}
+            label={"Data da Criação"}
             placeholder=""
-            inputState={selectedPlan ? selectedPlan.values.toString() : ""}
+            inputState={selectedPlan.createdAt}
             inputSetState={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -142,4 +140,4 @@ const TypePlan = () => {
   );
 };
 
-export default TypePlan;
+export default TypeSpecialties;

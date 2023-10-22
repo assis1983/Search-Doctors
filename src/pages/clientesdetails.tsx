@@ -13,8 +13,45 @@ import {
 } from "../components/StyleInputsUser/style";
 import CheckBoxUser from "../components/CheckBoxUser";
 import Line from "../assets/icons/line";
+import { useEffect, useState } from "react";
+import { getUser } from "../services/User/getUsersDetails";
+import { useParams } from "react-router-dom";
+
+type UserType = {
+  id: number;
+  lastName: string;
+  firstName: string;
+  email: string;
+  phone: string;
+  specialties: { name: string }[];
+  profiles: { name: string }[];
+}[];
 
 const ClientesDetails = () => {
+  const { id } = useParams();
+  const [user, setUser] = useState<UserType>([] as UserType);
+  const [selectedUser, setSelectedUser] = useState<UserType>([] as UserType);
+  console.log(selectedUser);
+  const fetchUsers = async () => {
+    const result = await getUser();
+    if (result.message) {
+      alert(result.message);
+    } else {
+      setUser(result);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, [id]);
+
+  useEffect(() => {
+    const selectedusuario = user.find((user) => user.id === parseInt(id));
+    if (selectedusuario) {
+      setSelectedUser(selectedusuario);
+    }
+  }, [id, user]);
+
   return (
     <>
       <Menu />
@@ -32,7 +69,7 @@ const ClientesDetails = () => {
           <Input
             label={"Primeiro Nome"}
             placeholder={""}
-            inputState={""}
+            inputState={selectedUser.lastName}
             inputSetState={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -40,7 +77,7 @@ const ClientesDetails = () => {
           <Input
             label={"Sobrenome"}
             placeholder={""}
-            inputState={""}
+            inputState={selectedUser.firstName}
             inputSetState={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -50,7 +87,7 @@ const ClientesDetails = () => {
           <Input
             label={"Email"}
             placeholder={""}
-            inputState={""}
+            inputState={selectedUser.email}
             inputSetState={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -58,7 +95,7 @@ const ClientesDetails = () => {
           <Input
             label={"WhatsApp"}
             placeholder={""}
-            inputState={""}
+            inputState={selectedUser.phone}
             inputSetState={function (): void {
               throw new Error("Function not implemented.");
             }}

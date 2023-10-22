@@ -18,7 +18,7 @@ type NewPlanState = {
   isModalOpen: boolean;
 };
 
-const NewPlan: React.FC = () => {
+const NewPlan = () => {
   const [state, setState] = useState<NewPlanState>({
     isModalOpen: false,
   });
@@ -110,7 +110,7 @@ const NewPlan: React.FC = () => {
             <Title fontSize={14} color={colors.deepGrey}>
               Situação
             </Title>
-            <ToggleButton onToggle={handleEnabledChange} />
+            <ToggleButton onToggle={handleEnabledChange} enabled={true} />
           </div>
           <div className="styled-title-active">
             <Title fontSize={16} color={colors.deepGrey}>

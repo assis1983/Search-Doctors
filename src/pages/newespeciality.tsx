@@ -11,38 +11,58 @@ import { Container } from "../components/Container/styles";
 import { Title } from "../components/Title/style";
 import { Input } from "../components/Input";
 import ToggleButton from "../components/ToggleButton";
+import { postSpecialties } from "../services/Especialities/postSpecialties";
+import { ChangeEvent, useState } from "react";
 import { Button } from "../components/Button";
 import { CloseButton, CustomModal } from "../components/StyleModal/style";
-import { useState } from "react";
-import { postSpecialties } from "../services/Especialities/postSpecialties";
+
+type NewSpecialties = {
+  isModalOpen: boolean;
+};
 
 const NewEspciality = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [specialtyName, setSpecialtyName] = useState("");
+  const [state, setState] = useState<NewSpecialties>({
+    isModalOpen: false,
+  });
 
-  const handleSaveClick = async () => {
-    try {
-      const response = await postSpecialties();
-      console.log(response);
-
-      if (response) {
-        // A especialidade foi salva com sucesso, você pode exibir o modal ou fazer outras ações aqui
-        openModal();
-      }
-    } catch (error) {
-      // Trate os erros de requisição aqui, se necessário
-    }
-  };
+  const [name, setSpecialtiesName] = useState("");
+  const [enabled, setEnabled] = useState(false);
 
   const openModal = () => {
-    setIsModalOpen(true);
+    setState({ ...state, isModalOpen: true });
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setState({ ...state, isModalOpen: false });
   };
 
-  console.log(specialtyName);
+  const clearInputs = () => {
+    setSpecialtiesName("");
+    setEnabled(false);
+  };
+
+  const handleSpecialtiesNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSpecialtiesName(e.target.value);
+  };
+
+  const handleEnabledChange = () => {
+    setEnabled(!enabled);
+  };
+
+  const handleSaveClick = async () => {
+    if (!name || !enabled) {
+      window.alert("Preencha todos os campos antes de salvar.");
+    } else {
+      const response = await postSpecialties(name, enabled);
+
+      if (response) {
+        openModal();
+        clearInputs();
+      } else {
+        console.error("Erro ao salvar o plano.");
+      }
+    }
+  };
   return (
     <>
       <Menu />
@@ -60,14 +80,15 @@ const NewEspciality = () => {
           <Input
             label={"Nome"}
             placeholder={""}
-            inputState={specialtyName}
-            inputSetState={setSpecialtyName}
+            inputState={name}
+            inputSetState={setSpecialtiesName}
+            onChange={handleSpecialtiesNameChange}
           />
           <div className="styled-toogle">
             <Title fontSize={14} color={colors.deepGrey}>
               Situação
             </Title>
-            <ToggleButton onToggle={() => {}} />
+            <ToggleButton onToggle={() => {}} enabled={true} />
           </div>
           <div className="styled-title-active">
             <Title fontSize={16} color={colors.deepGrey}>
@@ -76,9 +97,9 @@ const NewEspciality = () => {
           </div>
         </StyleInputUser>
         <Button text={"Salvar"} variant={"login"} onClick={handleSaveClick} />
-        <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
+        <CustomModal isOpen={state.isModalOpen} onRequestClose={closeModal}>
           <div>
-            <Title fontSize={32}>Especialidade Salva com Sucesso</Title>
+            <Title fontSize={32}>Plano Salvo com Sucesso</Title>
             <CloseButton onClick={closeModal}>X</CloseButton>
           </div>
         </CustomModal>

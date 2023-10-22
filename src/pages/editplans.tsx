@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
@@ -20,10 +20,7 @@ import { Button } from "../components/Button";
 type PlansType = {
   id: number;
   planTitle: string;
-  enabled: boolean;
-  actions: ReactNode;
   values: number;
-  period: string;
 }[];
 
 const EditPlans = () => {
@@ -52,10 +49,12 @@ const EditPlans = () => {
     const result = await putPlan(updatedPlan);
     if (result.message) {
       alert(result.message);
-      fetchPlans(); // Assuming fetchPlans is now an async function
+      fetchPlans();
     } else {
-      alert("Plano atualizado com sucesso!"); // Or any other success message
-      fetchPlans(); // Assuming fetchPlans is now an async function
+      alert("Plano atualizado com sucesso!");
+      fetchPlans();
+      setPlanTitle("");
+      setValues("");
     }
   };
 

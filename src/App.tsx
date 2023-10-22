@@ -15,6 +15,7 @@ import NewNotification from "./pages/newnotification";
 import EditProfile from "./pages/editprofile";
 import Questions from "./pages/commonquestions";
 import EditPlans from "./pages/editplans";
+import TypeSpecialties from "./pages/typespceialties";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/registeruser" element={<RegisterUser />} />
-          <Route path="/clientesdetails" element={<ClientesDetails />} />
+          <Route path="/clientesdetails/:id" element={<ClientesDetails />} />
           <Route path="/plans" element={<Plans />} />
           <Route path="/newplan" element={<NewPlan />} />
           <Route path="/typeplan/:id" element={<TypePlan />} />
@@ -34,6 +35,7 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/specialties" element={<Specialties />} />
           <Route path="/newspeciality" element={<NewEspciality />} />
+          <Route path="/typespecialties/:id" element={<TypeSpecialties />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/newnotification" element={<NewNotification />} />
           <Route path="/editprofile" element={<EditProfile />} />

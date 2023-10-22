@@ -1,27 +1,25 @@
-import { AxiosResponse } from "axios";
+import { isAxiosError } from "axios";
 import { api } from "../Api/apiservice";
 
-type SpecialtiesApi = {
-  content: {
-    name: string;
-    enabled: boolean;
-  }[];
-};
-
-export const postSpecialties = async () => {
+export const postSpecialties = async (name: string, enabled: boolean) => {
   try {
     const token = localStorage.getItem("token");
-    const result: AxiosResponse<SpecialtiesApi> = await api.post(
-      "/specialties",
+    const response = await api.post(
+      "/plans",
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        name,
+        enabled,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
-
-    return result.data.content;
+    return response.data;
+    console.log(response);
   } catch (error) {
-    console.log(error);
+    if (isAxiosError(error)) {
+      return null;
+    }
+    return null;
   }
 };

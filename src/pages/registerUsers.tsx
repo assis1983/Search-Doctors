@@ -37,10 +37,6 @@ const RegisterUser = () => {
 
   const navigate = useNavigate();
 
-  const goToPage = (url: string) => {
-    navigate(url);
-  };
-
   const fetchUsers = async () => {
     const result = await getUser();
     if (result.message) {
@@ -98,7 +94,7 @@ const RegisterUser = () => {
           {cad.map((item) => (
             <tr
               key={item.id}
-              onClick={() => goToPage(`/clientesdetails/`)}
+              onClick={() => navigate(`/clientesdetails/${item.id}`)}
               style={{ cursor: "pointer" }}
             >
               <td>{item.lastName}</td>
@@ -108,7 +104,7 @@ const RegisterUser = () => {
                 {item.specialties.map((specialty) => specialty.name).join(", ")}
               </td>{" "}
               <td>Adamantina</td>
-              <td>SP</td>{" "}
+              <td>SP</td>
               <td>{item.profiles.map((perfil) => perfil.name).join(", ")}</td>
             </tr>
           ))}

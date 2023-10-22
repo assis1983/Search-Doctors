@@ -14,6 +14,10 @@ import { getSpecialties } from "../services/Especialities/getSpecialties";
 import EyeTable from "../assets/icons/eyetable";
 import Pencil from "../assets/icons/pencil";
 import Delete from "../assets/icons/delete";
+import { useNavigate } from "react-router-dom";
+import { CustomModal } from "../components/StyleModal/style";
+import { Button } from "../components/Button";
+import { deleteSpecialties } from "../services/Especialities/deleteSpecialties";
 
 type SpecialtiesType = {
   id: number;
@@ -32,6 +36,8 @@ const Specialties = () => {
   const [stateFilter, setStateFilter] = useState<
     "TODOS" | "EM_ALTA" | "EM_BAIXA"
   >("TODOS");
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [planToDelete, setPlanToDelete] = useState(null);
 
   const fetchSpecialties = async () => {
     const result = await getSpecialties();
@@ -41,6 +47,7 @@ const Specialties = () => {
       setSpecialties(result);
     }
   };
+  const navigate = useNavigate();
 
   const handleSearchClick = () => {
     const filteredUsers = specialties.filter((item) =>
@@ -48,6 +55,22 @@ const Specialties = () => {
     );
     setSpecialties(filteredUsers);
   };
+
+  const handleDeleteSpecialtyes = (id) => {
+    setPlanToDelete(id);
+    setIsConfirmationModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    setIsConfirmationModalOpen(false);
+
+    if (planToDelete !== null) {
+      deleteSpecialties(planToDelete);
+      setPlanToDelete(null);
+      window.location.reload();
+    }
+  };
+
   useEffect(() => {
     fetchSpecialties();
   }, []);
@@ -86,7 +109,7 @@ const Specialties = () => {
         </StyleDivFilter>
         <Table headersArray={tableTitle}>
           {specialties.map((index) => (
-            <tr key={index.id} style={{ cursor: "pointer" }}>
+            <tr key={index.id}>
               <td>{index.name}</td>
               <td className="toogle">
                 {index.enabled}
@@ -94,13 +117,46 @@ const Specialties = () => {
               </td>
               <td>
                 {index.actions}
-                <EyeTable />
+                <button
+                  className="buttonNavigate"
+                  onClick={() => navigate(`/typespecialties/${index.id}`)}
+                >
+                  <EyeTable />
+                </button>
                 <Pencil />
-                <Delete />
+                <button
+                  className="buttonNavigate"
+                  onClick={() => handleDeleteSpecialtyes(index.id)}
+                >
+                  <Delete />
+                </button>
               </td>
             </tr>
           ))}
         </Table>
+        <CustomModal
+          isOpen={isConfirmationModalOpen}
+          onRequestClose={() => setIsConfirmationModalOpen(false)}
+        >
+          <Title fontSize={25}>
+            Tem certeza que deseja{" "}
+            <span style={{ color: "red", textDecoration: "underline" }}>
+              excluir
+            </span>
+            esse item?
+          </Title>
+          <Button
+            text={"Sim, Exluir Item"}
+            variant={"login"}
+            onClick={handleConfirmDelete}
+          ></Button>
+          <button
+            onClick={() => setIsConfirmationModalOpen(false)}
+            className="cancel"
+          >
+            <span style={{ color: "red" }}>Cancelar</span>
+          </button>
+        </CustomModal>
       </Container>
     </>
   );
