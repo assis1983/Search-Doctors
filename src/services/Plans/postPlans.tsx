@@ -24,7 +24,6 @@ export const postPlan = async (
       }
     );
     return response.data;
-    console.log(response);
   } catch (error) {
     if (isAxiosError(error)) {
       return null;

@@ -5,7 +5,7 @@ export const postSpecialties = async (name: string, enabled: boolean) => {
   try {
     const token = localStorage.getItem("token");
     const response = await api.post(
-      "/plans",
+      "/specialties",
       {
         name,
         enabled,
@@ -15,7 +15,6 @@ export const postSpecialties = async (name: string, enabled: boolean) => {
       }
     );
     return response.data;
-    console.log(response);
   } catch (error) {
     if (isAxiosError(error)) {
       return null;

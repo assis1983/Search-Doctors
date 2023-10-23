@@ -88,7 +88,7 @@ const NewEspciality = () => {
             <Title fontSize={14} color={colors.deepGrey}>
               Situação
             </Title>
-            <ToggleButton onToggle={() => {}} enabled={true} />
+            <ToggleButton onToggle={handleEnabledChange} enabled={true} />
           </div>
           <div className="styled-title-active">
             <Title fontSize={16} color={colors.deepGrey}>
@@ -99,7 +99,7 @@ const NewEspciality = () => {
         <Button text={"Salvar"} variant={"login"} onClick={handleSaveClick} />
         <CustomModal isOpen={state.isModalOpen} onRequestClose={closeModal}>
           <div>
-            <Title fontSize={32}>Plano Salvo com Sucesso</Title>
+            <Title fontSize={32}>Especialidade Salva com Sucesso</Title>
             <CloseButton onClick={closeModal}>X</CloseButton>
           </div>
         </CustomModal>

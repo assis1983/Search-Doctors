@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { CustomModal, CloseButton } from "../components/StyleModal/style";
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
