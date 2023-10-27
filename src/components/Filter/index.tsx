@@ -1,22 +1,24 @@
-import { Dispatch, SetStateAction } from 'react'
-import { Filter } from '../../assets/icons/filter'
-import { Button } from '../Button'
-import { FilterStyle } from './styles'
+import { Dispatch, SetStateAction } from "react";
+import { Filter } from "../../assets/icons/filter";
+import { Button } from "../Button";
+import { FilterStyle } from "./styles";
 
 type Props = {
-  openOrClosed: boolean
-  button: Dispatch<SetStateAction<boolean>>
-  stateFilter: 'TODOS' | 'EM_ALTA' | 'EM_BAIXA'
-  setStateFilter: Dispatch<SetStateAction<'TODOS' | 'EM_ALTA' | 'EM_BAIXA'>>
-  getFilter: () => void
-}
+  openOrClosed: boolean;
+  button: Dispatch<SetStateAction<boolean>>;
+  stateFilter: "TODOS" | "MÉDICOS" | "CONTRATANTES";
+  setStateFilter: Dispatch<
+    SetStateAction<"TODOS" | "MÉDICOS" | "CONTRATANTES">
+  >;
+  getFilter: () => void;
+};
 
 export function FilterButton({
   openOrClosed,
   button,
   stateFilter,
   setStateFilter,
-  getFilter
+  getFilter,
 }: Props) {
   return (
     <FilterStyle>
@@ -30,24 +32,24 @@ export function FilterButton({
             <p className="status">Status</p>
             <div className="filterItem">
               <input
-                checked={stateFilter === 'TODOS'}
-                onChange={() => setStateFilter('TODOS')}
+                checked={stateFilter === "TODOS"}
+                onChange={() => setStateFilter("TODOS")}
                 type="checkbox"
               />
               <p>Todos</p>
             </div>
             <div className="filterItem">
               <input
-                checked={stateFilter === 'EM_ALTA'}
-                onChange={() => setStateFilter('EM_ALTA')}
+                checked={stateFilter === "MÉDICOS"}
+                onChange={() => setStateFilter("MÉDICOS")}
                 type="checkbox"
               />
               <p>Médicos</p>
             </div>
             <div className="filterItem">
               <input
-                checked={stateFilter === 'EM_BAIXA'}
-                onChange={() => setStateFilter('EM_BAIXA')}
+                checked={stateFilter === "CONTRATANTES"}
+                onChange={() => setStateFilter("CONTRATANTES")}
                 type="checkbox"
               />
               <p>Contratantes</p>
@@ -63,5 +65,5 @@ export function FilterButton({
         </div>
       )}
     </FilterStyle>
-  )
+  );
 }

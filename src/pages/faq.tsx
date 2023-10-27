@@ -12,17 +12,55 @@ import {
 import { CustomModal, CloseButton } from "../components/StyleModal/style";
 import { Title } from "../components/Title/style";
 import { colors } from "../theme";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { postFaq } from "../services/Questions/postfaq";
+
+type NewPlanState = {
+  isModalOpen: boolean;
+};
 
 const Faq = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [state, setState] = useState<NewPlanState>({
+    isModalOpen: false,
+  });
+
+  const [planTitle, setPlanTitle] = useState("");
+  const [message, setMessage] = useState("");
 
   const openModal = () => {
-    setIsModalOpen(true);
+    setState({ ...state, isModalOpen: true });
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setState({ ...state, isModalOpen: false });
+  };
+
+  const clearInputs = () => {
+    setPlanTitle("");
+    setMessage("");
+  };
+
+  const handlePlanTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPlanTitle(e.target.value);
+  };
+
+  const handleMessage = (e: ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
+
+  const handleSaveClick = async () => {
+    if (!planTitle || !message === null) {
+      window.alert("Preencha todos os campos antes de salvar.");
+    } else {
+      const response = await postFaq(planTitle, message);
+
+      if (response) {
+        openModal();
+        clearInputs();
+      } else {
+        console.error("Erro ao salvar o plano.");
+      }
+    }
   };
 
   return (
@@ -42,24 +80,22 @@ const Faq = () => {
           <Input
             label={"Título da pergunta"}
             placeholder={""}
-            inputState={""}
-            inputSetState={function (): void {
-              throw new Error("Function not implemented.");
-            }}
+            inputState={planTitle}
+            inputSetState={setPlanTitle}
+            onChange={handlePlanTitleChange}
           />
         </StyleInputUser>
         <div className="input-messenger">
           <Input
             label={"Mensagem"}
             placeholder={""}
-            inputState={""}
-            inputSetState={function (): void {
-              throw new Error("Function not implemented.");
-            }}
+            inputState={message}
+            inputSetState={setMessage}
+            onChange={handleMessage}
           />
         </div>
-        <Button text={"Salvar"} variant={"login"} onClick={openModal} />
-        <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
+        <Button text={"Salvar"} variant={"login"} onClick={handleSaveClick} />
+        <CustomModal isOpen={state.isModalOpen} onRequestClose={closeModal}>
           <div>
             <Title fontSize={32}>Pergunta Salva com Sucesso</Title>
             <CloseButton onClick={closeModal}>X</CloseButton>

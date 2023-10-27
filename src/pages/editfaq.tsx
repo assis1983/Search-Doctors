@@ -12,26 +12,26 @@ import {
   StyleInputUser,
   StyleLinkUser,
 } from "../components/StyleInputsUser/style";
-import { getPlans } from "../services/Plans/getPlans";
-import { putPlan } from "../services/Plans/putPlans";
+import { getQuestions } from "../services/Questions/getQuestions";
+import { putQuestion } from "../services/Questions/putQuestions";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 
 type PlansType = {
   id: number;
-  planTitle: string;
-  values: number;
+  title: string;
+  message: string;
 }[];
 
-const EditPlans = () => {
+const EditFaq = () => {
   const { id } = useParams();
   const [plans, setPlans] = useState<PlansType>([] as PlansType);
   const [selectedPlan, setSelectedPlan] = useState<PlansType>([] as PlansType);
   const [planTitle, setPlanTitle] = useState("");
-  const [values, setValues] = useState("");
+  const [message, setMessage] = useState("");
 
   const fetchPlans = async () => {
-    const result = await getPlans();
+    const result = await getQuestions();
     if (result.message) {
       alert(result.message);
     } else {
@@ -43,10 +43,10 @@ const EditPlans = () => {
     const updatedPlan = {
       id,
       planTitle,
-      values: parseFloat(values),
+      message,
     };
 
-    const result = await putPlan(updatedPlan);
+    const result = await putQuestion(updatedPlan);
     if (result.message) {
       alert(result.message);
       fetchPlans();
@@ -54,7 +54,7 @@ const EditPlans = () => {
       alert("Plano atualizado com sucesso!");
       fetchPlans();
       setPlanTitle("");
-      setValues("");
+      setMessage("");
     }
   };
 
@@ -66,8 +66,8 @@ const EditPlans = () => {
     const selectedPlan = plans.find((plan) => plan.id === parseInt(id));
     if (selectedPlan) {
       setSelectedPlan(selectedPlan);
-      setPlanTitle(selectedPlan.planTitle);
-      setValues(selectedPlan.values.toString());
+      setPlanTitle(selectedPlan.title);
+      setMessage(selectedPlan.message);
     }
   }, [id, plans]);
 
@@ -75,19 +75,19 @@ const EditPlans = () => {
     <>
       <Menu />
       <Header />
-      <StyleLinkUser to="/plans">
+      <StyleLinkUser to="/questions">
         <CardTitle2
           icon={<ChevronLeft />}
-          text={"Planos"}
+          text={"FAQ"}
           backgroundColor={colors.light}
         />
       </StyleLinkUser>
 
       <StyledTitle>
-        <Title fontSize={32}>Editar Plano</Title>
+        <Title fontSize={32}>Editar Pergunta</Title>
       </StyledTitle>
       <Container>
-        <Title fontSize={20}>Dados do Plano</Title>
+        <Title fontSize={20}>Dados da Pergunta</Title>
         <StyleInputUser>
           <Input
             label={"Plano"}
@@ -101,8 +101,8 @@ const EditPlans = () => {
           <Input
             label={"Valor"}
             placeholder={""}
-            inputState={values}
-            inputSetState={setValues}
+            inputState={message}
+            inputSetState={setMessage}
             onChange={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -114,4 +114,4 @@ const EditPlans = () => {
   );
 };
 
-export default EditPlans;
+export default EditFaq;

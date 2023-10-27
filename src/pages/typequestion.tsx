@@ -1,41 +1,37 @@
-import { ReactNode, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { Menu } from "../components/SideBar";
 import { Header } from "../components/Header";
-import { Container } from "../components/Container/styles";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getQuestions } from "../services/Questions/getQuestions";
+import { StyleOptionsPlan } from "../components/Styleoptionsplan/style";
 import {
   StyleInputUser,
   StyleLinkUser,
 } from "../components/StyleInputsUser/style";
-import { StyleOptionsPlan } from "../components/Styleoptionsplan/style";
 import { CardTitle2 } from "../components/Cardone";
 import ChevronLeft from "../assets/icons/chevron left";
-import { colors } from "../theme";
-import { Title } from "../components/Title/style";
-import { Input } from "../components/Input";
-import ToggleButton from "../components/ToggleButton";
 import Pencil from "../assets/icons/pencil";
+import { CloseButton, CustomModal } from "../components/StyleModal/style";
 import Delete from "../assets/icons/delete";
-import { CustomModal, CloseButton } from "../components/StyleModal/style";
+import { Title } from "../components/Title/style";
+import { Container } from "../components/Container/styles";
+import { Input } from "../components/Input";
 import { Button } from "../components/Button";
-import { getPlans } from "../services/Plans/getPlans";
+import { colors } from "../theme";
 
-type PlansType = {
+type QuestionsTYpe = {
   id: number;
-  planTitle: string;
-  enabled: boolean;
-  actions: ReactNode;
-  values: number;
-  period: string;
+  title: string;
+  messsage: string;
 }[];
 
-const TypePlan = () => {
+const TypeQuestion = () => {
   const { id } = useParams();
-  const [plans, setPlans] = useState<PlansType>([] as PlansType);
-  const [selectedPlan, setSelectedPlan] = useState<PlansType>([]);
+  const [plans, setPlans] = useState<QuestionsTYpe>([] as QuestionsTYpe);
+  const [selectedPlan, setSelectedPlan] = useState<QuestionsTYpe>([]);
 
   const fetchPlans = async () => {
-    const result = await getPlans();
+    const result = await getQuestions();
     if (result.message) {
       alert(result.message);
     } else {
@@ -69,10 +65,10 @@ const TypePlan = () => {
       <Menu />
       <Header />
       <StyleOptionsPlan>
-        <StyleLinkUser to="/plans">
+        <StyleLinkUser to="/questions">
           <CardTitle2
             icon={<ChevronLeft />}
-            text={"Planos"}
+            text={"FAQ Perguntas Frequentes"}
             backgroundColor={colors.light}
           />
         </StyleLinkUser>
@@ -105,12 +101,12 @@ const TypePlan = () => {
         </div>
       </StyleOptionsPlan>
       <Container>
-        <Title fontSize={20}>Dados do Plano</Title>
+        <Title fontSize={20}>Dados da Pergunta</Title>
         <StyleInputUser>
           <Input
-            label={"Título do plano"}
+            label={"Título"}
             placeholder=""
-            inputState={selectedPlan.planTitle}
+            inputState={selectedPlan.title}
             inputSetState={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -118,23 +114,10 @@ const TypePlan = () => {
               throw new Error("Function not implemented.");
             }}
           />
-          <div className="styled-toogle">
-            <Title fontSize={14} color={colors.deepGrey}>
-              Situação
-            </Title>
-            <ToggleButton onToggle={() => {}} enabled={selectedPlan.enabled} />
-          </div>
-          <div className="styled-title-active">
-            <Title fontSize={16} color={colors.deepGrey}>
-              {selectedPlan.enabled ? "Ativo" : "Inativo"}
-            </Title>
-          </div>
-        </StyleInputUser>
-        <div className="input-value">
           <Input
-            label={"Valor"}
+            label={"Mensagem"}
             placeholder=""
-            inputState={selectedPlan ? selectedPlan.values.toString() : ""}
+            inputState={selectedPlan.message}
             inputSetState={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -142,10 +125,10 @@ const TypePlan = () => {
               throw new Error("Function not implemented.");
             }}
           />
-        </div>
+        </StyleInputUser>
       </Container>
     </>
   );
 };
 
-export default TypePlan;
+export default TypeQuestion;

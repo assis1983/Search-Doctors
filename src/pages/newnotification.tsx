@@ -10,20 +10,65 @@ import { colors } from "../theme";
 import { Container } from "../components/Container/styles";
 import { Title } from "../components/Title/style";
 import { Input } from "../components/Input";
+import { postNotifications } from "../services/Notifications/postNotifications";
+import { ChangeEvent, useState } from "react";
 import { Button } from "../components/Button";
 import { CloseButton, CustomModal } from "../components/StyleModal/style";
-import { useState } from "react";
+
+type NewNotificationState = {
+  isModalOpen: boolean;
+};
 
 const NewNotification = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [state, setState] = useState<NewNotificationState>({
+    isModalOpen: false,
+  });
+
+  const [title, setTitle] = useState<string>("");
+  const [sendingDate, setSendingDate] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
   const openModal = () => {
-    setIsModalOpen(true);
+    setState({ ...state, isModalOpen: true });
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setState({ ...state, isModalOpen: false });
   };
+
+  const clearInputs = () => {
+    setTitle("");
+    setSendingDate("");
+    setMessage("");
+  };
+
+  const handleNotificatonsTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const handleSendingDate = (e: ChangeEvent<HTMLInputElement>) => {
+    setSendingDate(e.target.value);
+  };
+
+  const handleMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
+
+  const handleSaveClick = async () => {
+    if (!title || !sendingDate || message === null) {
+      window.alert("Preencha todos os campos antes de salvar.");
+    } else {
+      const response = await postNotifications(title, sendingDate, message);
+
+      if (response) {
+        openModal();
+        clearInputs();
+      } else {
+        console.error("Erro ao salvar o plano.");
+      }
+    }
+  };
+
   return (
     <>
       <Menu />
@@ -41,34 +86,31 @@ const NewNotification = () => {
           <Input
             label={"Título"}
             placeholder={""}
-            inputState={""}
-            inputSetState={function (): void {
-              throw new Error("Function not implemented.");
-            }}
+            inputState={title}
+            inputSetState={setTitle}
+            onChange={handleNotificatonsTitleChange}
           />
           <Input
             label={"Data de envio"}
             placeholder={""}
-            inputState={""}
-            inputSetState={function (): void {
-              throw new Error("Function not implemented.");
-            }}
+            inputState={sendingDate}
+            inputSetState={setSendingDate}
+            onChange={handleSendingDate}
           />
         </StyleInputUser>
         <div className="input-messenger">
           <Input
             label={"Mensagem"}
             placeholder={""}
-            inputState={""}
-            inputSetState={function (): void {
-              throw new Error("Function not implemented.");
-            }}
+            inputState={message}
+            inputSetState={setMessage}
+            onChange={handleMessageChange}
           />
         </div>
-        <Button text={"Salvar"} variant={"login"} onClick={openModal} />
-        <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
+        <Button text={"Salvar"} variant={"login"} onClick={handleSaveClick} />
+        <CustomModal isOpen={state.isModalOpen} onRequestClose={closeModal}>
           <div>
-            <Title fontSize={32}>Notificação Salva com Sucesso</Title>
+            <Title fontSize={32}>Plano Salvo com Sucesso</Title>
             <CloseButton onClick={closeModal}>X</CloseButton>
           </div>
         </CustomModal>

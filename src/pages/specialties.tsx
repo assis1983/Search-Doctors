@@ -18,11 +18,13 @@ import { useNavigate } from "react-router-dom";
 import { CustomModal } from "../components/StyleModal/style";
 import { Button } from "../components/Button";
 import { deleteSpecialties } from "../services/Especialities/deleteSpecialties";
+import ToggleButton from "../components/ToggleButton";
+import { colors } from "../theme";
 
 type SpecialtiesType = {
   id: number;
   name: string;
-  enabled: ReactNode;
+  enabled: boolean;
   actions: ReactNode;
 }[];
 
@@ -33,9 +35,10 @@ const Specialties = () => {
   const tableTitle = ["Nome Especialidade", "Situação", "Ações"];
   const [searchParam, setSearchParam] = useState<string>("");
   const [filterOn, setFilterOn] = useState<boolean>(false);
-  const [stateFilter, setStateFilter] = useState<
-    "TODOS" | "EM_ALTA" | "EM_BAIXA"
-  >("TODOS");
+  const [stateFilter, setStateFilter] = useState(
+    // "TODOS" | "MÉDICOS" | "CONTRATANTES"
+    "TODOS"
+  );
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [planToDelete, setPlanToDelete] = useState(null);
 
@@ -108,25 +111,30 @@ const Specialties = () => {
           </StyleLinkNewPlan>
         </StyleDivFilter>
         <Table headersArray={tableTitle}>
-          {specialties.map((index) => (
-            <tr key={index.id}>
-              <td>{index.name}</td>
+          {specialties.map((item) => (
+            <tr key={item.id}>
+              <td>{item.name}</td>
               <td className="toogle">
-                {index.enabled}
-                {"Ativo"}
+                <ToggleButton onToggle={() => {}} enabled={item.enabled} />
+                {""}
+                <div className="styled-title-active">
+                  <Title fontSize={16} color={colors.deepGrey}>
+                    {item.enabled ? "Ativo" : "Ativo"}{" "}
+                  </Title>
+                </div>
               </td>
               <td>
-                {index.actions}
+                {item.actions}
                 <button
                   className="buttonNavigate"
-                  onClick={() => navigate(`/typespecialties/${index.id}`)}
+                  onClick={() => navigate(`/typespecialties/${item.id}`)}
                 >
                   <EyeTable />
                 </button>
                 <Pencil />
                 <button
                   className="buttonNavigate"
-                  onClick={() => handleDeleteSpecialtyes(index.id)}
+                  onClick={() => handleDeleteSpecialtyes(item.id)}
                 >
                   <Delete />
                 </button>

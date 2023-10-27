@@ -103,8 +103,8 @@ const RegisterUser = () => {
               <td>
                 {item.specialties.map((specialty) => specialty.name).join(", ")}
               </td>{" "}
-              <td>Adamantina</td>
-              <td>SP</td>
+              <td>-</td>
+              <td>-</td>
               <td>{item.profiles.map((perfil) => perfil.name).join(", ")}</td>
             </tr>
           ))}

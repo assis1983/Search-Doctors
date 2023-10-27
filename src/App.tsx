@@ -16,6 +16,10 @@ import EditProfile from "./pages/editprofile";
 import Questions from "./pages/commonquestions";
 import EditPlans from "./pages/editplans";
 import TypeSpecialties from "./pages/typespceialties";
+import TypeNotifications from "./pages/typenotifications";
+import EditNotification from "./pages/editnotification";
+import TypeQuestion from "./pages/typequestion";
+import EditFaq from "./pages/editfaq";
 
 function App() {
   return (
@@ -39,6 +43,13 @@ function App() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/newnotification" element={<NewNotification />} />
           <Route path="/editprofile" element={<EditProfile />} />
+          <Route
+            path="/typenotifications/:id"
+            element={<TypeNotifications />}
+          />
+          <Route path="/editnotification/:id" element={<EditNotification />} />
+          <Route path="/typequestion/:id" element={<TypeQuestion />} />
+          <Route path="/editfaq/:id" element={<EditFaq />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -8,6 +8,7 @@ type Props = {
   inputState: string;
   inputSetState: Dispatch<SetStateAction<string>>;
   password?: boolean;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export function Input({
@@ -15,11 +16,13 @@ export function Input({
   placeholder,
   inputState,
   inputSetState,
+  onChange,
   password,
 }: Props) {
   const [showPassword, setShowPassword] = useState(false);
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     inputSetState(event.target.value);
+    onChange(event);
   };
 
   const togglePasswordVisibility = () => {

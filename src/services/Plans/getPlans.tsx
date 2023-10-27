@@ -19,7 +19,6 @@ export const getPlans = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(result);
     return result.data.content;
   } catch (error) {
     console.log(error);

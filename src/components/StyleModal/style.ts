@@ -19,7 +19,6 @@ export const CustomModal = styled(Modal)`
   .style-deleteplan {
     display: flex;
     justify-content: center;
-    background-color: blue;
   p {
     display: flex;
     justify-content: center;

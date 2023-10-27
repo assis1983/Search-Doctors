@@ -13,24 +13,28 @@ import { ButtonAdd } from "../components/ButtonAdd";
 import { Table } from "../components/Table";
 import EyeTable from "../assets/icons/eyetable";
 import Pencil from "../assets/icons/pencil";
-import Delete from "../assets/icons/delete";
 import { getNotification } from "../services/Notifications/getNotifications";
+import { useNavigate } from "react-router-dom";
 
 type NotificationsType = {
   id: number;
   title: string;
-  updatedAt: number;
+  sendingDate: string;
+  updatedAt: string;
+  message: string;
 }[];
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState<NotificationsType>(
     [] as NotificationsType
   );
+  const [searchParam, setSearchParam] = useState<string>("");
+  const navigate = useNavigate();
   const productTableTitle = ["Título", "Data de Envio", "Ações"];
   const [selectedButton, setSelectedButton] = useState<string>("Médicos");
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [stateFilter, setStateFilter] = useState<
-    "TODOS" | "EM_ALTA" | "EM_BAIXA"
+    "TODOS" | "MÉDICOS" | "CONTRATANTES"
   >("TODOS");
 
   const fetchNotifications = async () => {
@@ -40,6 +44,13 @@ const Notifications = () => {
     } else {
       setNotifications(result);
     }
+  };
+
+  const handleSearchClick = () => {
+    const fiterNotification = notifications.filter((item) =>
+      item.title.toLowerCase().includes(searchParam.toLowerCase())
+    );
+    setNotifications(fiterNotification);
   };
 
   useEffect(() => {
@@ -63,13 +74,9 @@ const Notifications = () => {
         <StyleDivFilter>
           <StyleInputs>
             <SearchInput
-              searchParam={""}
-              setSearchParam={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-              onClick={function (): void {
-                throw new Error("Function not implemented.");
-              }}
+              searchParam={searchParam}
+              setSearchParam={setSearchParam}
+              onClick={handleSearchClick}
             />
           </StyleInputs>
           <FilterButton
@@ -90,13 +97,22 @@ const Notifications = () => {
         </StyleDivFilter>
         <Table headersArray={productTableTitle}>
           {notifications.map((item) => (
-            <tr key={item.id} style={{ cursor: "pointer" }}>
+            <tr key={item.id}>
               <td>{item.title}</td>
               <td>{item.updatedAt}</td>
               <td>
-                <EyeTable />
-                <Pencil />
-                <Delete />
+                <button
+                  className="buttonNavigate"
+                  onClick={() => navigate(`/typenotifications/${item.id}`)}
+                >
+                  <EyeTable />
+                </button>
+                <button
+                  className="buttonNavigate"
+                  onClick={() => navigate(`/editnotification/${item.id}`)}
+                >
+                  <Pencil />
+                </button>
               </td>
             </tr>
           ))}

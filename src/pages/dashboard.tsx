@@ -22,8 +22,8 @@ const Dashboard = () => {
 
   const fetchUserLast = async () => {
     const result = await getUserLast();
-    if (result.message) {
-      alert(result.message);
+    if (result?.message) {
+      alert(result?.message);
     } else {
       setUserLast(result);
     }

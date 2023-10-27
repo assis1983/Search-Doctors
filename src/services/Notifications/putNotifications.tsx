@@ -1,20 +1,20 @@
 import axios from "axios";
 import { api } from "../Api/apiservice";
 
-export const putPlan = async (
+export const putNotification = async (
   id: number,
-  planTitle: string,
-  enabled: boolean,
-  values: number
+  title: string,
+  sendingDate: string,
+  message: boolean
 ) => {
   try {
     const token = localStorage.getItem("token");
     const response = await api.put(
-      `/plans/${id}`,
+      `/notifications/${id}`,
       {
-        planTitle,
-        enabled,
-        values,
+        title,
+        sendingDate,
+        message,
       },
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -34,7 +34,7 @@ export const putPlan = async (
   }
 
   return {
-    logged: true,
+    logged: false,
     message: "Erro ao alterar os dados",
   };
 };

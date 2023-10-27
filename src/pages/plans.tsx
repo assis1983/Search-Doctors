@@ -29,6 +29,7 @@ type PlansType = {
   actions: ReactNode;
   values: number;
   period: string;
+  promotionalPrice: number;
 }[];
 
 const Plans = () => {
@@ -43,7 +44,7 @@ const Plans = () => {
   const [selectedButton, setSelectedButton] = useState<string>("Médicos");
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [stateFilter, setStateFilter] = useState<
-    "TODOS" | "EM_ALTA" | "EM_BAIXA"
+    "TODOS" | "MEDICOS" | "CONTRATANTES"
   >("TODOS");
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [planToDelete, setPlanToDelete] = useState(null);

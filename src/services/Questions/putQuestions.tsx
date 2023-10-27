@@ -1,20 +1,18 @@
 import axios from "axios";
 import { api } from "../Api/apiservice";
 
-export const putPlan = async (
+export const putQuestion = async (
   id: number,
   planTitle: string,
-  enabled: boolean,
-  values: number
+  message: string
 ) => {
   try {
     const token = localStorage.getItem("token");
     const response = await api.put(
-      `/plans/${id}`,
+      `/questions/${id}`,
       {
         planTitle,
-        enabled,
-        values,
+        message,
       },
       {
         headers: { Authorization: `Bearer ${token}` },
